@@ -544,7 +544,7 @@ function generateLeafRaidData() {
     const baseCoins = 5050000;
     const baseExp = 500;
     
-    for (let room = 1; room <= 1000; room++) {
+    for (let room = 1; room <= 2000; room++) {
         const hp = baseHP * Math.pow(1.1, room - 1);
         leafRaidData.push({
             name: `Leaf Raid Room ${room}`,
@@ -827,4 +827,5 @@ const dropRates = Object.freeze({
         baseChance: 0.15
     }
 });
+
 
