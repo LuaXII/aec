@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anime Eternal Calculator</title>
+    <link rel="icon" type="image/png" href="image.png">
+    <link rel="shortcut icon" type="image/png" href="image.png">
+    <link rel="apple-touch-icon" href="image.png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -34,19 +37,38 @@
     </div>
 
     <nav class="navbar">
-        <div class="container">
+        <div class="nav-container">
             <div class="nav-content">
                 <div class="logo">
                     <img src="image.png" alt="Anime Eternal Logo" class="nav-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
                     <div style="display: none; background: #6a0dad; padding: 5px; border-radius: 5px; color: white; font-weight: bold; height: 35px; width: 35px; text-align: center; line-height: 25px;">AE</div>
-                    <h2>Anime Eternal</h2>
+                    <h2>Anime Eternal Calculator</h2>
                 </div>
                 <div class="nav-links">
-                    <a href="#" class="nav-link active" data-tab="home">Home</a>
-                    <a href="#" class="nav-link" data-tab="time-to-kill">Time to Kill</a>
-                    <a href="#" class="nav-link" data-tab="loot-calculator">Loot Calculator</a>
-                    <a href="#" class="nav-link" data-tab="level-progression">Level Progress</a>
-                    <a href="#" class="nav-link" data-tab="rank-up">Rank Up</a>
+                    <a href="#" class="nav-link active" data-tab="home">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="#" class="nav-link" data-tab="config">
+                        <i class="fas fa-cog"></i>
+                        <span>Config</span>
+                    </a>
+                    <a href="#" class="nav-link" data-tab="time-to-kill">
+                        <i class="fas fa-stopwatch"></i>
+                        <span>Time to Kill</span>
+                    </a>
+                    <a href="#" class="nav-link" data-tab="loot-calculator">
+                        <i class="fas fa-treasure-chest"></i>
+                        <span>Loot Calculator</span>
+                    </a>
+                    <a href="#" class="nav-link" data-tab="level-progression">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>Level Calculator</span>
+                    </a>
+                    <a href="#" class="nav-link" data-tab="rank-up">
+                        <i class="fas fa-star"></i>
+                        <span>Rank Up</span>
+                    </a>
                 </div>
                 <div class="mobile-menu">
                     <i class="fas fa-bars"></i>
@@ -58,67 +80,727 @@
     <main class="main-content">
         <div id="home" class="tab-content active">
             <section class="hero">
-                <div class="container">
+                <div class="hero-container">
                     <div class="hero-content">
-                        <div class="logo-container">
-                            <div class="game-logo">
-                                <img src="image.png" alt="Anime Eternal Logo" class="main-logo-image" onerror="this.outerHTML='<div class=&quot;main-logo-image&quot; style=&quot;background: #6a0dad; padding: 40px; border-radius: 10px; color: white; font-weight: bold; font-size: 2rem; text-align: center;&quot;>ANIME ETERNAL</div>';">
-                                <p class="tagline">Ultimate Roblox Adventure</p>
+                        <div class="hero-logo">
+                            <img src="image.png" alt="Anime Eternal Logo" class="main-logo">
+                        </div>
+                        <div class="feature-grid">
+                            <div class="feature-highlight">
+                                <i class="fas fa-calculator"></i>
+                                <span>4+ Calculators</span>
+                            </div>
+                            <div class="feature-highlight">
+                                <i class="fas fa-save"></i>
+                                <span>Save Configs</span>
+                            </div>
+                            <div class="feature-highlight">
+                                <i class="fas fa-share"></i>
+                                <span>Share Results</span>
                             </div>
                         </div>
-                        <div class="hero-text">
-                            <h2>Complete Every World</h2>
-                            <p>Complete 15+ unique worlds, defeat unique SS bosses, and become the ultimate champion above all green and grey roles.</p>
-                            <div class="cta-buttons">
-                                <a href="https://www.roblox.com/games/90462358603255/Anime-Eternal#!/game-instances" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-                                    <i class="fab fa-roblox"></i> Play Now
-                                </a>
-                                <a href="#" class="btn btn-secondary" data-tab="loot-calculator">
-                                    <i class="fas fa-calculator"></i> Calculators
-                                </a>
-                            </div>
+                        <div class="hero-actions">
+                            <button class="btn btn-primary btn-large" data-tab="config">
+                                <i class="fas fa-cog"></i> Setup Configuration
+                            </button>
                         </div>
                     </div>
                 </div>
             </section>
+
             <section class="features">
                 <div class="container">
-                    <h2>Calculator Features</h2>
+                    <div class="section-header">
+                        <h2>Calculator Features</h2>
+                        <p>Choose the calculator that fits your needs</p>
+                    </div>
+                    
                     <div class="features-grid">
-                        <div class="feature-card">
-                            <i class="fas fa-stopwatch"></i>
-                            <h3>Time to Kill</h3>
-                            <p>Calculate kill times and find optimal targets for your DPS</p>
+                        <div class="feature-card" data-tab="config">
+                            <div class="feature-icon">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3>Configuration</h3>
+                                <p>Set up your gamepasses, upgrades, achievements, and equipment. Apply them across all calculators for consistent results.</p>
+                                <div class="feature-benefits">
+                                    <span class="benefit-tag">Save Time</span>
+                                    <span class="benefit-tag">Consistent</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="feature-card">
-                            <i class="fas fa-treasure-chest"></i>
-                            <h3>Loot Calculator</h3>
-                            <p>Optimize farming efficiency with equipment bonuses</p>
+                        
+                        <div class="feature-card" data-tab="time-to-kill">
+                            <div class="feature-icon">
+                                <i class="fas fa-stopwatch"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3>Time to Kill</h3>
+                                <p>Calculate kill times for any mob and find optimal targets for your current DPS level.</p>
+                                <div class="feature-benefits">
+                                    <span class="benefit-tag">Precise</span>
+                                    <span class="benefit-tag">Fast</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="feature-card">
-                            <i class="fas fa-arrow-up"></i>
-                            <h3>Level Progress</h3>
-                            <p>Track XP farming progress with prestige multipliers</p>
+                        
+                        <div class="feature-card" data-tab="loot-calculator">
+                            <div class="feature-icon">
+                                <i class="fas fa-treasure-chest"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3>Loot Calculator</h3>
+                                <p>Optimize farming efficiency with detailed loot calculations including coins, XP, tokens, and souls.</p>
+                                <div class="feature-benefits">
+                                    <span class="benefit-tag">Optimize</span>
+                                    <span class="benefit-tag">Detailed</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="feature-card">
-                            <i class="fas fa-star"></i>
-                            <h3>Rank Up Timer</h3>
-                            <p>Calculate energy requirements and potion efficiency</p>
+                        
+                        <div class="feature-card" data-tab="level-progression">
+                            <div class="feature-icon">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3>Level Calculator</h3>
+                                <p>Track XP farming progress with prestige multipliers and potion optimization.</p>
+                                <div class="feature-benefits">
+                                    <span class="benefit-tag">Track</span>
+                                    <span class="benefit-tag">Progress</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-card" data-tab="rank-up">
+                            <div class="feature-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3>Rank Up Calculator</h3>
+                                <p>Calculate energy requirements and clicking patterns for efficient rank progression.</p>
+                                <div class="feature-benefits">
+                                    <span class="benefit-tag">Efficient</span>
+                                    <span class="benefit-tag">Strategic</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
         </div>
-        
-        <div id="time-to-kill" class="tab-content">
-            <div class="container-fluid">
-                <div class="calculator-header">
-                    <h2><i class="fas fa-stopwatch"></i> Time to Kill Calculator</h2>
-                    <p>Calculate how long it takes to defeat any mob with your current DPS</p>
+
+        <div id="config" class="tab-content">
+            <div class="page-container">
+                <div class="page-header">
+                    <div class="header-content">
+                        <h1><i class="fas fa-cog"></i> Configuration</h1>
+                        <p>Set up your gamepasses, upgrades, achievements, and equipment. This will be applied to all calculators.</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" id="save-config">
+                            <i class="fas fa-save"></i> Save Configuration
+                        </button>
+                        <button class="btn btn-secondary" id="reset-config">
+                            <i class="fas fa-undo"></i> Reset All
+                        </button>
+                    </div>
                 </div>
                 
-                <div class="unified-layout">
-                    <div class="controls-section">
+                <div class="config-content">
+                    <div class="config-presets">
+                        <h3><i class="fas fa-magic"></i> Quick Presets</h3>
+                        <div class="preset-buttons">
+                            <button class="btn btn-preset" id="set-max-all">
+                                <i class="fas fa-crown"></i> Max Everything
+                            </button>
+                            <button class="btn btn-preset" id="set-max-exp">
+                                <i class="fas fa-arrow-up"></i> Max EXP Setup
+                            </button>
+                            <button class="btn btn-preset" id="set-max-coins">
+                                <i class="fas fa-coins"></i> Max Coins Setup
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="config-grid">
+                        <div class="config-section">
+                            <div class="section-header">
+                                <h3><i class="fas fa-gem"></i> Gamepasses & Perks</h3>
+                            </div>
+                            <div class="checkbox-grid">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="config-vip-gamepass">
+                                    <span class="checkmark"></span>
+                                    <div class="item-content">
+                                        <span class="item-name">VIP Gamepass</span>
+                                        <span class="item-bonus">+5% XP</span>
+                                    </div>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="config-premium-benefits">
+                                    <span class="checkmark"></span>
+                                    <div class="item-content">
+                                        <span class="item-name">Premium Benefits</span>
+                                        <span class="item-bonus">+10% Coins</span>
+                                    </div>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="config-double-coins-gamepass">
+                                    <span class="checkmark"></span>
+                                    <div class="item-content">
+                                        <span class="item-name">Double Coins Gamepass</span>
+                                        <span class="item-bonus">2x Coins</span>
+                                    </div>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="config-double-exp-gamepass">
+                                    <span class="checkmark"></span>
+                                    <div class="item-content">
+                                        <span class="item-name">Double EXP Gamepass</span>
+                                        <span class="item-bonus">2x XP</span>
+                                    </div>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="config-double-souls-gamepass">
+                                    <span class="checkmark"></span>
+                                    <div class="item-content">
+                                        <span class="item-name">Double Souls Gamepass</span>
+                                        <span class="item-bonus">2x Souls</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="config-section">
+                            <div class="section-header">
+                                <h3><i class="fas fa-level-up-alt"></i> Upgrades</h3>
+                            </div>
+                            <div class="upgrades-grid">
+                                <div class="upgrade-item">
+                                    <label for="config-dungeon-exp-level">Dungeon EXP Upgrade</label>
+                                    <div class="upgrade-input">
+                                        <input type="number" id="config-dungeon-exp-level" min="0" max="10" value="0">
+                                        <span class="upgrade-bonus" id="dungeon-exp-bonus">+0% XP</span>
+                                    </div>
+                                </div>
+                                <div class="upgrade-item">
+                                    <label for="config-coin-upgrades-level">Coin Upgrades</label>
+                                    <div class="upgrade-input">
+                                        <input type="number" id="config-coin-upgrades-level" min="0" max="30" value="0">
+                                        <span class="upgrade-bonus" id="coin-upgrades-bonus">+0% Coins</span>
+                                    </div>
+                                </div>
+                                <div class="upgrade-item">
+                                    <label for="config-upgrade-drops-level">Upgrade Drops</label>
+                                    <div class="upgrade-input">
+                                        <input type="number" id="config-upgrade-drops-level" min="0" max="13" value="0">
+                                        <span class="upgrade-bonus" id="upgrade-drops-bonus">+0% Token Drops</span>
+                                    </div>
+                                </div>
+                                <div class="upgrade-item">
+                                    <label for="config-avatar-souls-upgrade-level">Avatar Souls Upgrade</label>
+                                    <div class="upgrade-input">
+                                        <input type="number" id="config-avatar-souls-upgrade-level" min="0" max="19" value="0">
+                                        <span class="upgrade-bonus" id="avatar-souls-bonus">+0% Soul Drops</span>
+                                    </div>
+                                </div>
+                                <div class="upgrade-item">
+                                    <label for="config-demon-lord-level">Demon Lord Upgrade</label>
+                                    <div class="upgrade-input">
+                                        <input type="number" id="config-demon-lord-level" min="0" max="100" value="0">
+                                        <span class="upgrade-bonus" id="demon-lord-bonus">+0% Coins</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="config-section">
+                            <div class="section-header">
+                                <h3><i class="fas fa-trophy"></i> Achievements</h3>
+                            </div>
+                            
+                            <div class="achievement-subsection">
+                                <h4>Total Coins Achievements</h4>
+                                <div class="achievement-grid">
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-total-coins-i">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Total Coins I</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-total-coins-ii">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Total Coins II</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-total-coins-iii">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Total Coins III</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-total-coins-iv">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Total Coins IV</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-total-coins-v">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Total Coins V</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-total-coins-vi">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Total Coins VI</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-total-coins-vii">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Total Coins VII</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-total-coins-viii">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Total Coins VIII</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-total-coins-ix">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Total Coins IX</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-total-coins-x">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Total Coins X</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-total-coins-xi">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Total Coins XI</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-total-coins-xii">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Total Coins XII</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-total-coins-xiii">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Total Coins XIII</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-total-coins-xiv">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Total Coins XIV</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-total-coins-xv">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Total Coins XV</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="achievement-subsection">
+                                <h4>Dungeon Achievements</h4>
+                                <div class="achievement-grid">
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-dungeon-easy-iv">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Dungeon Easy IV</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-dungeon-medium-iv">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Dungeon Medium IV</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-dungeon-hard-iv">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Dungeon Hard IV</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-dungeon-insane-iv">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Dungeon Insane IV</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-dungeon-crazy-iv">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Dungeon Crazy IV</span>
+                                            <span class="item-bonus">+10% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-dungeon-nightmare-iv">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Dungeon Nightmare IV</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="achievement-subsection">
+                                <h4>World Quest Achievements</h4>
+                                <div class="achievement-grid">
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-world-earth-city">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Earth City</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-world-windmill-island">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Windmill Island</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-world-soul-society">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Soul Society</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-world-cursed-school">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Cursed School</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-world-slayer-village">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Slayer Village</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-world-solo-island">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Solo Island</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-world-clover-village">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Clover Village</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-world-leaf-village">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Leaf Village</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-world-spirit-residence">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Spirit Residence</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-world-magic-hunter-city">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Magic Hunter City</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-world-titan-city">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Titan City</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-world-village-of-sins">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Village of Sins</span>
+                                            <span class="item-bonus">+5% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-world-kaiju-base">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Kaiju Base</span>
+                                            <span class="item-bonus">+4% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-world-tempest-capital">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Tempest Capital</span>
+                                            <span class="item-bonus">+3% Coins</span>
+                                        </div>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="config-world-virtual-city">
+                                        <span class="checkmark"></span>
+                                        <div class="item-content">
+                                            <span class="item-name">Virtual City</span>
+                                            <span class="item-bonus">+2% Coins</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="config-section">
+                            <div class="section-header">
+                                <h3><i class="fas fa-magic"></i> Aura</h3>
+                            </div>
+                            
+                            <div class="aura-grid">
+                                <div class="equipment-item">
+                                    <label for="config-aura-select">Active Aura</label>
+                                    <select id="config-aura-select" class="styled-select">
+                                        <option value="0">None</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="config-section">
+                            <div class="section-header">
+                                <h3><i class="fas fa-gem"></i> Jewelry</h3>
+                            </div>
+                            
+                            <div class="jewelry-grid">
+                                <div class="equipment-item">
+                                    <label for="config-ring-select">Ring (Coin Multiplier)</label>
+                                    <select id="config-ring-select" class="styled-select">
+                                        <option value="0">None</option>
+                                    </select>
+                                </div>
+                                <div class="equipment-item">
+                                    <label for="config-necklace-select">Necklace (Coin Multiplier)</label>
+                                    <select id="config-necklace-select" class="styled-select">
+                                        <option value="0">None</option>
+                                    </select>
+                                </div>
+                                <div class="equipment-item">
+                                    <label for="config-earrings-select">Earrings (Coin Multiplier)</label>
+                                    <select id="config-earrings-select" class="styled-select">
+                                        <option value="0">None</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="config-section">
+                            <div class="section-header">
+                                <h3><i class="fas fa-tshirt"></i> Accessories</h3>
+                            </div>
+                            
+                            <div class="accessories-grid">
+                                <div class="equipment-item">
+                                    <label for="config-hat-select">Hat (Base Coins)</label>
+                                    <select id="config-hat-select" class="styled-select">
+                                        <option value="0">None</option>
+                                    </select>
+                                </div>
+                                <div class="equipment-item">
+                                    <label for="config-scarf-select">Scarf (Base Coins)</label>
+                                    <select id="config-scarf-select" class="styled-select">
+                                        <option value="0">None</option>
+                                    </select>
+                                </div>
+                                <div class="equipment-item">
+                                    <label for="config-mask-select">Mask</label>
+                                    <select id="config-mask-select" class="styled-select">
+                                        <option value="0">None</option>
+                                    </select>
+                                </div>
+                                <div class="equipment-item">
+                                    <label for="config-cloak-select">Cloak</label>
+                                    <select id="config-cloak-select" class="styled-select">
+                                        <option value="0">None</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="config-section">
+                            <div class="section-header">
+                                <h3><i class="fas fa-bolt"></i> Powers</h3>
+                            </div>
+                            
+                            <div class="powers-grid">
+                                <div class="equipment-item">
+                                    <label for="config-fruit-select">Demon Fruit</label>
+                                    <select id="config-fruit-select" class="styled-select">
+                                        <option value="0">None</option>
+                                    </select>
+                                </div>
+                                <div class="equipment-item">
+                                    <label for="config-eyes-select">Power Eyes</label>
+                                    <select id="config-eyes-select" class="styled-select">
+                                        <option value="0">None</option>
+                                    </select>
+                                </div>
+                                <div class="equipment-item">
+                                    <label for="config-virtue-select">Virtue</label>
+                                    <select id="config-virtue-select" class="styled-select">
+                                        <option value="0">None</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="multiplier-display">
+                        <div class="section-header">
+                            <h3><i class="fas fa-calculator"></i> Current Multipliers</h3>
+                            <p>Your total multipliers based on current configuration</p>
+                        </div>
+                        <div class="multipliers-grid">
+                            <div class="multiplier-card">
+                                <div class="multiplier-icon exp">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="multiplier-content">
+                                    <span class="multiplier-label">Total EXP</span>
+                                    <span class="multiplier-value" id="total-exp-multiplier">1.00x</span>
+                                </div>
+                            </div>
+                            <div class="multiplier-card">
+                                <div class="multiplier-icon coins">
+                                    <i class="fas fa-coins"></i>
+                                </div>
+                                <div class="multiplier-content">
+                                    <span class="multiplier-label">Total Coins</span>
+                                    <span class="multiplier-value" id="total-coin-multiplier">1.00x</span>
+                                </div>
+                            </div>
+                            <div class="multiplier-card">
+                                <div class="multiplier-icon base-coins">
+                                    <i class="fas fa-plus"></i>
+                                </div>
+                                <div class="multiplier-content">
+                                    <span class="multiplier-label">Base Coins</span>
+                                    <span class="multiplier-value" id="total-base-coins">+0.00</span>
+                                </div>
+                            </div>
+                            <div class="multiplier-card">
+                                <div class="multiplier-icon tokens">
+                                    <i class="fas fa-gem"></i>
+                                </div>
+                                <div class="multiplier-content">
+                                    <span class="multiplier-label">Token Drops</span>
+                                    <span class="multiplier-value" id="total-token-multiplier">1.00x</span>
+                                </div>
+                            </div>
+                            <div class="multiplier-card">
+                                <div class="multiplier-icon souls">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <div class="multiplier-content">
+                                    <span class="multiplier-label">Soul Drops</span>
+                                    <span class="multiplier-value" id="total-soul-multiplier">1.00x</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="time-to-kill" class="tab-content">
+            <div class="page-container">
+                <div class="page-header">
+                    <div class="header-content">
+                        <h1><i class="fas fa-stopwatch"></i> Time to Kill Calculator</h1>
+                        <p>Calculate how long it takes to defeat any mob with your current DPS</p>
+                    </div>
+                </div>
+                
+                <div class="calculator-layout">
+                    <div class="controls-panel">
+                        <div class="panel-header">
+                            <h3><i class="fas fa-sliders-h"></i> Settings</h3>
+                        </div>
                         <div class="control-group">
                             <label for="dps-input">Your DPS</label>
                             <div class="number-input">
@@ -129,7 +811,7 @@
                         
                         <div class="control-group">
                             <label for="world-select">Filter by World</label>
-                            <select id="world-select" class="world-select"></select>
+                            <select id="world-select" class="styled-select"></select>
                         </div>
                         
                         <div id="raid-ranges" class="control-group" style="display: none;">
@@ -147,8 +829,8 @@
                         </div>
                     </div>
                     
-                    <div class="results-section">
-                        <div class="results-header">
+                    <div class="results-panel">
+                        <div class="panel-header">
                             <h3><i class="fas fa-chart-bar"></i> Kill Time Results</h3>
                             <div class="legend">
                                 <span class="legend-item instant"><span class="color-dot"></span>Instant</span>
@@ -169,50 +851,121 @@
         </div>
         
         <div id="loot-calculator" class="tab-content">
-            <div class="container-fluid">
-                <div class="calculator-header">
-                    <h2><i class="fas fa-treasure-chest"></i> Loot & Farming Calculator</h2>
-                    <p>Find your optimal farming spots and calculate potential rewards.</p>
+            <div class="page-container">
+                <div class="page-header">
+                    <div class="header-content">
+                        <h1><i class="fas fa-treasure-chest"></i> Loot & Farming Calculator</h1>
+                        <p>Find your optimal farming spots and calculate potential rewards using your saved configuration.</p>
+                    </div>
                 </div>
                 
-                <div class="unified-layout">
-                    <div class="controls-section">
-                        <div class="control-group">
-                            <label for="quick-dps-input">Your DPS</label>
-                            <div class="number-input">
-                                <input type="number" id="quick-dps-input" placeholder="Enter your DPS">
-                                <select id="quick-dps-suffix"></select>
+                <div class="calculator-layout">
+                    <div class="controls-panel">
+                        <div class="panel-header">
+                            <h3><i class="fas fa-sliders-h"></i> Settings</h3>
+                        </div>
+                        
+                        <div class="current-config-display">
+                            <h4><i class="fas fa-info-circle"></i> Your Multipliers</h4>
+                            <div class="config-summary">
+                                <div class="config-item">
+                                    <span class="config-label">Total EXP:</span>
+                                    <span class="config-value exp" id="loot-exp-multiplier">1.00x</span>
+                                </div>
+                                <div class="config-item">
+                                    <span class="config-label">Total Coins:</span>
+                                    <span class="config-value coins" id="loot-coin-multiplier">1.00x</span>
+                                </div>
+                                <div class="config-item">
+                                    <span class="config-label">Base Coins:</span>
+                                    <span class="config-value base-coins" id="loot-base-coins">+0.00</span>
+                                </div>
+                                <div class="config-item">
+                                    <span class="config-label">Token Drops:</span>
+                                    <span class="config-value tokens" id="loot-token-multiplier">1.00x</span>
+                                </div>
+                                <div class="config-item">
+                                    <span class="config-label">Soul Drops:</span>
+                                    <span class="config-value souls" id="loot-soul-multiplier">1.00x</span>
+                                </div>
                             </div>
+                            <button class="btn btn-tertiary btn-small" data-tab="config">
+                                <i class="fas fa-cog"></i> Update Config
+                            </button>
                         </div>
-                        
+
                         <div class="control-group">
-                            <label for="quick-farm-hours">Farming Duration (Hours)</label>
-                            <input type="number" id="quick-farm-hours" value="1" min="0.1" step="0.1">
-                        </div>
-                        
-                        <div class="control-group">
-                            <label>Farm Type</label>
-                            <div class="radio-group">
-                                <label class="radio-item"><input type="radio" name="farm-type" value="3" checked><span class="radiomark"></span> 3 Mob</label>
-                                <label class="radio-item"><input type="radio" name="farm-type" value="4"><span class="radiomark"></span> 4 Mob</label>
+                            <label for="farm-dps-input">Your DPS</label>
+                            <div class="number-input">
+                                <input type="number" id="farm-dps-input" placeholder="Enter your DPS" step="0.01">
+                                <select id="farm-dps-suffix" class="suffix-select"></select>
                             </div>
                         </div>
                         
                         <div class="control-group">
                             <label for="farm-world-select">World</label>
-                            <select id="farm-world-select"></select>
+                            <select id="farm-world-select" class="styled-select"></select>
                         </div>
                         
                         <div class="control-group">
-                            <label for="mob-select">Specific Mob</label>
-                            <select id="mob-select">
-                                <option value="">Auto-select optimal</option>
+                            <label for="farm-mob-select">Mob (Optional)</label>
+                            <select id="farm-mob-select" class="styled-select">
+                                <option value="">Auto-select best mob</option>
                             </select>
                         </div>
                         
-                        <button id="toggle-config" class="btn btn-tertiary full-width">
-                            <i class="fas fa-cog"></i> Equipment & Bonuses
-                        </button>
+                        <div class="control-group">
+                            <label>Farm Duration</label>
+                            <div class="farm-duration">
+                                <input type="number" id="farm-hours" min="0" max="23" value="1" placeholder="Hours">
+                                <span>hours</span>
+                                <input type="number" id="farm-minutes" min="0" max="59" value="0" placeholder="Minutes">
+                                <span>minutes</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label>Mob Count</label>
+                            <div class="radio-group">
+                                <label class="radio-item">
+                                    <input type="radio" name="farm-type" value="1">
+                                    <span class="radio-mark"></span>
+                                    <span class="radio-label">Single Mob</span>
+                                </label>
+                                <label class="radio-item">
+                                    <input type="radio" name="farm-type" value="3" checked>
+                                    <span class="radio-mark"></span>
+                                    <span class="radio-label">3 Mobs</span>
+                                </label>
+                                <label class="radio-item">
+                                    <input type="radio" name="farm-type" value="4">
+                                    <span class="radio-mark"></span>
+                                    <span class="radio-label">4 Mobs</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="optimal-farms">
+                            <h4><i class="fas fa-trophy"></i> Optimal Farms</h4>
+                            <div class="optimal-farm-card" id="optimal-xp-farm">
+                                <div class="optimal-header">
+                                    <i class="fas fa-star"></i>
+                                    <span>Best XP Farm</span>
+                                </div>
+                                <div class="optimal-content">
+                                    <p>Configure your setup to see recommendations</p>
+                                </div>
+                            </div>
+                            <div class="optimal-farm-card" id="optimal-coin-farm">
+                                <div class="optimal-header">
+                                    <i class="fas fa-coins"></i>
+                                    <span>Best Coin Farm</span>
+                                </div>
+                                <div class="optimal-content">
+                                    <p>Configure your setup to see recommendations</p>
+                                </div>
+                            </div>
+                        </div>
                         
                         <div class="action-buttons">
                             <button class="btn btn-primary" onclick="takeScreenshot('loot-calculator')">
@@ -224,86 +977,46 @@
                         </div>
                     </div>
                     
-                    <div class="results-section">
-                        <div class="optimal-farms-grid">
-                            <div class="optimal-card">
-                                <h4><i class="fas fa-arrow-up-right-dots"></i> Best XP Farm</h4>
-                                <div id="optimal-xp-farm" class="optimal-content">
-                                    <div class="no-results"><p>Enter DPS to see optimal XP farm</p></div>
-                                </div>
-                            </div>
-                            <div class="optimal-card">
-                                <h4><i class="fas fa-coins"></i> Best Coin Farm</h4>
-                                <div id="optimal-coin-farm" class="optimal-content">
-                                    <div class="no-results"><p>Enter DPS to see optimal coin farm</p></div>
-                                </div>
-                            </div>
+                    <div class="results-panel">
+                        <div class="panel-header">
+                            <h3><i class="fas fa-chart-bar"></i> Farming Results</h3>
                         </div>
                         
                         <div id="loot-results" class="detailed-results">
                         </div>
                     </div>
                 </div>
-                
-                <div id="config-panel" class="config-panel collapsed">
-                    <div class="config-content">
-                        <div class="config-section">
-                            <h4><i class="fas fa-gem"></i> Gamepasses & Perks</h4>
-                            <div class="checkbox-grid">
-                                <label class="checkbox-item"><input type="checkbox" id="vip-gamepass"><span class="checkmark"></span> <span class="item-name">VIP (+5% XP)</span></label>
-                                <label class="checkbox-item"><input type="checkbox" id="premium-benefits"><span class="checkmark"></span> <span class="item-name">Premium (+10% Coins)</span></label>
-                                <label class="checkbox-item"><input type="checkbox" id="double-coins-gamepass"><span class="checkmark"></span> <span class="item-name">2x Coins</span></label>
-                                <label class="checkbox-item"><input type="checkbox" id="double-exp-gamepass"><span class="checkmark"></span> <span class="item-name">2x EXP</span></label>
-                                <label class="checkbox-item"><input type="checkbox" id="double-souls-gamepass"><span class="checkmark"></span> <span class="item-name">2x Souls</span></label>
-                            </div>
-                            <button id="select-all-gamepasses" class="btn btn-tertiary">
-                                <i class="fas fa-check-double"></i> All Gamepasses
-                            </button>
-                        </div>
-                        
-                        <div class="config-section">
-                            <h4><i class="fas fa-ring"></i> Jewelry</h4>
-                            <div class="jewelry-grid">
-                                <div class="config-row"><label for="ring-select">Ring</label><select id="ring-select"></select></div>
-                                <div class="config-row"><label for="necklace-select">Necklace</label><select id="necklace-select"></select></div>
-                                <div class="config-row"><label for="earrings-select">Earrings</label><select id="earrings-select"></select></div>
-                            </div>
-                        </div>
-                        
-                        <div class="config-section">
-                            <h4><i class="fas fa-hat-wizard"></i> Equipment</h4>
-                            <div class="equipment-grid">
-                                <div class="config-row"><label for="aura-select">Aura</label><select id="aura-select"></select></div>
-                                <div class="config-row"><label for="hat-select">Hat</label><select id="hat-select"></select></div>
-                                <div class="config-row"><label for="scarf-select">Scarf</label><select id="scarf-select"></select></div>
-                                <div class="config-row"><label for="mask-select">Mask</label><select id="mask-select"></select></div>
-                                <div class="config-row"><label for="cloak-select">Cloak</label><select id="cloak-select"></select></div>
-                            </div>
-                        </div>
-                        
-                        <div class="config-section">
-                            <h4><i class="fas fa-bolt"></i> Powers & Levels</h4>
-                            <div class="powers-grid">
-                                <div class="config-row"><label for="fruit-select">Demon Fruit</label><select id="fruit-select"></select></div>
-                                <div class="config-row"><label for="eyes-select">Power Eyes</label><select id="eyes-select"></select></div>
-                                <div class="config-row"><label for="virtue-select">Virtue</label><select id="virtue-select"></select></div>
-                                <div class="config-row"><label for="demon-lord-level">Demon Lord Level</label><input type="number" id="demon-lord-level" min="0" value="0"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
-        
+
         <div id="level-progression" class="tab-content">
-            <div class="container-fluid">
-                <div class="calculator-header">
-                    <h2><i class="fas fa-arrow-up"></i> Level Progression Calculator</h2>
-                    <p>Calculate farming time to reach your target level with prestige bonuses and EXP potions</p>
+            <div class="page-container">
+                <div class="page-header">
+                    <div class="header-content">
+                        <h1><i class="fas fa-arrow-up"></i> Level Progression Calculator</h1>
+                        <p>Calculate farming time to reach your target level using your saved configuration</p>
+                    </div>
                 </div>
                 
-                <div class="unified-layout">
-                    <div class="controls-section">
+                <div class="calculator-layout">
+                    <div class="controls-panel">
+                        <div class="panel-header">
+                            <h3><i class="fas fa-sliders-h"></i> Settings</h3>
+                        </div>
+                        
+                        <div class="current-config-display">
+                            <h4><i class="fas fa-info-circle"></i> Your EXP Multipliers</h4>
+                            <div class="config-summary">
+                                <div class="config-item">
+                                    <span class="config-label">Total EXP:</span>
+                                    <span class="config-value exp" id="level-exp-multiplier">1.00x</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-tertiary btn-small" data-tab="config">
+                                <i class="fas fa-cog"></i> Update Config
+                            </button>
+                        </div>
+
                         <div class="control-group">
                             <label for="level-dps-input">Your DPS</label>
                             <div class="number-input">
@@ -314,71 +1027,56 @@
                         
                         <div class="control-group">
                             <label for="level-prestige-select">Prestige Level</label>
-                            <select id="level-prestige-select"></select>
+                            <select id="level-prestige-select" class="styled-select"></select>
                         </div>
                         
                         <div class="level-inputs">
                             <div class="control-group">
                                 <label for="level-current-level">Current Level</label>
-                                <input type="number" id="level-current-level" min="1" max="230" placeholder="Current level">
+                                <input type="number" id="level-current-level" min="1" placeholder="Your current level">
+                            </div>
+                            <div class="control-group">
+                                <label for="level-current-xp">Current XP (Optional)</label>
+                                <input type="number" id="level-current-xp" min="0" placeholder="Your current XP" step="0.01">
                             </div>
                             <div class="control-group">
                                 <label for="level-target-level">Target Level</label>
-                                <input type="number" id="level-target-level" min="1" max="230" placeholder="Target level">
-                            </div>
-                        </div>
-                        
-                        <div class="control-group">
-                            <label for="level-current-xp">Current XP Progress</label>
-                            <input type="number" id="level-current-xp" min="0" value="0" placeholder="XP in current level">
-                        </div>
-                        
-                        <div class="control-group">
-                            <label>Farm Type</label>
-                            <div class="radio-group">
-                                <label class="radio-item"><input type="radio" name="level-farm-type" value="3" checked><span class="radiomark"></span> 3 Mob</label>
-                                <label class="radio-item"><input type="radio" name="level-farm-type" value="4"><span class="radiomark"></span> 4 Mob</label>
+                                <input type="number" id="level-target-level" min="1" placeholder="Your target level">
                             </div>
                         </div>
                         
                         <div class="control-group">
                             <label for="level-world-select">World (Optional)</label>
-                            <select id="level-world-select">
-                                <option value="">Auto-select best</option>
+                            <select id="level-world-select" class="styled-select">
+                                <option value="">Auto-select best world</option>
                             </select>
                         </div>
                         
                         <div class="control-group">
                             <label for="level-mob-select">Mob (Optional)</label>
-                            <select id="level-mob-select">
-                                <option value="">Auto-select best XP</option>
+                            <select id="level-mob-select" class="styled-select">
+                                <option value="">Auto-select best mob</option>
                             </select>
                         </div>
-                        
-                        <div class="exp-bonuses">
-                            <h4><i class="fas fa-magic"></i> EXP Bonuses</h4>
-                            <div class="bonus-grid">
-                                <label class="checkbox-item"><input type="checkbox" id="level-double-exp-gamepass"><span class="checkmark"></span> <span class="item-name">2x EXP</span></label>
-                                <label class="checkbox-item"><input type="checkbox" id="level-vip-gamepass"><span class="checkmark"></span> <span class="item-name">VIP (+5%)</span></label>
-                                <label class="checkbox-item"><input type="checkbox" id="level-exp-potion"><span class="checkmark"></span> <span class="item-name">EXP Potion</span></label>
-                            </div>
-                            
-                            <div id="level-exp-potion-duration" class="potion-duration" style="display: none;">
-                                <label>Potion Duration</label>
-                                <div class="duration-inputs">
-                                    <div class="duration-input">
-                                        <label for="level-potion-days">Days</label>
-                                        <input type="number" id="level-potion-days" min="0" value="0">
-                                    </div>
-                                    <div class="duration-input">
-                                        <label for="level-potion-hours">Hours</label>
-                                        <input type="number" id="level-potion-hours" min="0" max="23" value="0">
-                                    </div>
-                                    <div class="duration-input">
-                                        <label for="level-potion-minutes">Minutes</label>
-                                        <input type="number" id="level-potion-minutes" min="0" max="59" value="15">
-                                    </div>
-                                </div>
+
+                        <div class="control-group">
+                            <label>Mob Count</label>
+                            <div class="radio-group">
+                                <label class="radio-item">
+                                    <input type="radio" name="level-farm-type" value="1">
+                                    <span class="radio-mark"></span>
+                                    <span class="radio-label">Single Mob</span>
+                                </label>
+                                <label class="radio-item">
+                                    <input type="radio" name="level-farm-type" value="3" checked>
+                                    <span class="radio-mark"></span>
+                                    <span class="radio-label">3 Mobs</span>
+                                </label>
+                                <label class="radio-item">
+                                    <input type="radio" name="level-farm-type" value="4">
+                                    <span class="radio-mark"></span>
+                                    <span class="radio-label">4 Mobs</span>
+                                </label>
                             </div>
                         </div>
                         
@@ -392,90 +1090,117 @@
                         </div>
                     </div>
                     
-                    <div class="results-section">
-                        <div id="level-progress-results" class="progress-results">
+                    <div class="results-panel">
+                        <div class="panel-header">
+                            <h3><i class="fas fa-chart-bar"></i> Level Progress Results</h3>
+                        </div>
+                        <div id="level-results" class="detailed-results">
                             <div class="no-results">
                                 <i class="fas fa-info-circle"></i>
-                                <p>Configure your level settings to see progress</p>
+                                <p>Enter your levels and DPS to see results</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <div id="rank-up" class="tab-content">
-            <div class="container-fluid">
-                <div class="calculator-header">
-                    <h2><i class="fas fa-star"></i> Rank Up Calculator</h2>
-                    <p>Calculate energy requirements and time to reach your next rank or energy goal</p>
+            <div class="page-container">
+                <div class="page-header">
+                    <div class="header-content">
+                        <h1><i class="fas fa-star"></i> Rank Up Calculator</h1>
+                        <p>Calculate energy requirements and optimal clicking strategies for rank progression</p>
+                    </div>
                 </div>
                 
-                <div class="unified-layout">
-                    <div class="controls-section">
-                        <div class="control-group">
-                            <label for="current-rank">Current Rank</label>
-                            <input type="number" id="current-rank" min="1" max="75" placeholder="Enter current rank">
-                            <div id="next-rank-display" class="rank-info"></div>
+                <div class="calculator-layout">
+                    <div class="controls-panel">
+                        <div class="panel-header">
+                            <h3><i class="fas fa-sliders-h"></i> Settings</h3>
                         </div>
                         
-                        <div class="control-group">
-                            <label for="current-energy">Current Energy</label>
-                            <div class="number-input">
-                                <input type="number" id="current-energy" placeholder="Enter current energy" step="0.01">
-                                <select id="current-energy-suffix" class="suffix-select"></select>
+                        <div class="rank-inputs">
+                            <div class="control-group">
+                                <label for="current-rank">Current Rank</label>
+                                <select id="current-rank" class="styled-select"></select>
+                            </div>
+                            <div class="control-group" id="target-energy-container" style="display: none;">
+                                <label for="target-energy">Target Energy Goal</label>
+                                <div class="number-input">
+                                    <input type="number" id="target-energy" placeholder="Set energy goal" step="0.01">
+                                    <select id="target-energy-suffix" class="suffix-select"></select>
+                                </div>
                             </div>
                         </div>
                         
-                        <div id="target-energy-container" class="control-group" style="display: none;">
-                            <label for="target-energy">Energy Goal</label>
-                            <div class="number-input">
-                                <input type="number" id="target-energy" placeholder="Enter energy goal" step="0.01">
-                                <select id="target-energy-suffix" class="suffix-select"></select>
+                        <div class="energy-inputs">
+                            <div class="control-group">
+                                <label for="current-energy">Current Energy</label>
+                                <div class="number-input">
+                                    <input type="number" id="current-energy" placeholder="Your current energy" step="0.01">
+                                    <select id="current-energy-suffix" class="suffix-select"></select>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label for="energy-per-click">Energy per Click</label>
+                                <div class="number-input">
+                                    <input type="number" id="energy-per-click" placeholder="Energy gained per click" step="0.01">
+                                    <select id="energy-per-click-suffix" class="suffix-select"></select>
+                                </div>
                             </div>
                         </div>
-                        
+
                         <div class="control-group">
                             <label>Clicking Method</label>
                             <div class="radio-group">
-                                <label class="radio-item"><input type="radio" name="clicking-method" value="slow"><span class="radiomark"></span> Slow (3.5 CPS)</label>
-                                <label class="radio-item"><input type="radio" name="clicking-method" value="fast"><span class="radiomark"></span> Fast Clicker</label>
+                                <label class="radio-item">
+                                    <input type="radio" name="clicking-method" value="slow" checked>
+                                    <span class="radio-mark"></span>
+                                    <span class="radio-label">Slow Clicker (3.5 CPS)</span>
+                                </label>
+                                <label class="radio-item">
+                                    <input type="radio" name="clicking-method" value="fast">
+                                    <span class="radio-mark"></span>
+                                    <span class="radio-label">Fast Clicker</span>
+                                </label>
                             </div>
                         </div>
-                        
-                        <div id="fast-clicker-speed" class="control-group" style="display: none;">
-                            <label for="clicker-speed">Clicker Speed</label>
-                            <input type="range" id="clicker-speed" min="4.5" max="5.5" step="0.1" value="5.0" class="speed-slider">
-                            <div class="speed-display"><span id="speed-value">5.0</span> CPS</div>
-                        </div>
-                        
-                        <div class="control-group">
-                            <label for="energy-per-click">Energy Per Click</label>
-                            <div class="number-input">
-                                <input type="number" id="energy-per-click" placeholder="Enter EPC" step="0.01">
-                                <select id="energy-per-click-suffix" class="suffix-select"></select>
+
+                        <div class="control-group" id="fast-clicker-speed" style="display: none;">
+                            <label for="clicker-speed">Fast Clicker Speed (CPS)</label>
+                            <div class="slider-container">
+                                <input type="range" id="clicker-speed" min="4.5" max="5.5" step="0.1" value="5.0">
+                                <div class="slider-display">
+                                    <span id="speed-value">5.0</span> CPS
+                                </div>
+                            </div>
+                            <div class="slider-help">
+                                <small>Adjust based on your server ping</small>
                             </div>
                         </div>
-                        
+
                         <div class="control-group">
-                            <label for="potion-type">Energy Potion</label>
-                            <select id="potion-type"></select>
+                            <label for="potion-type">Energy Potion (Optional)</label>
+                            <select id="potion-type" class="styled-select">
+                                <option value="none">None</option>
+                            </select>
                         </div>
-                        
-                        <div id="potion-duration-inputs" class="potion-duration" style="display: none;">
+
+                        <div class="control-group" id="potion-duration-inputs" style="display: none;">
                             <label>Potion Duration</label>
                             <div class="duration-inputs">
-                                <div class="duration-input">
-                                    <label for="potion-days">Days</label>
-                                    <input type="number" id="potion-days" min="0" value="0">
+                                <div class="duration-group">
+                                    <input type="number" id="potion-days" min="0" value="0" placeholder="Days">
+                                    <span>days</span>
                                 </div>
-                                <div class="duration-input">
-                                    <label for="potion-hours">Hours</label>
-                                    <input type="number" id="potion-hours" min="0" max="23" value="0">
+                                <div class="duration-group">
+                                    <input type="number" id="potion-hours" min="0" max="23" value="0" placeholder="Hours">
+                                    <span>hours</span>
                                 </div>
-                                <div class="duration-input">
-                                    <label for="potion-minutes">Minutes</label>
-                                    <input type="number" id="potion-minutes" min="0" max="59" value="15">
+                                <div class="duration-group">
+                                    <input type="number" id="potion-minutes" min="0" max="59" value="15" placeholder="Minutes">
+                                    <span>minutes</span>
                                 </div>
                             </div>
                         </div>
@@ -490,11 +1215,14 @@
                         </div>
                     </div>
                     
-                    <div class="results-section">
-                        <div id="rank-progress-results" class="rank-results">
+                    <div class="results-panel">
+                        <div class="panel-header">
+                            <h3><i class="fas fa-chart-bar"></i> Rank Up Results</h3>
+                        </div>
+                        <div id="rank-results" class="detailed-results">
                             <div class="no-results">
                                 <i class="fas fa-info-circle"></i>
-                                <p>Enter your rank and EPC to see results</p>
+                                <p>Configure your rank settings to see results</p>
                             </div>
                         </div>
                     </div>
@@ -502,14 +1230,10 @@
             </div>
         </div>
     </main>
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Anime Eternal Calculator. All game assets are property of their respective owners.</p>
-        </div>
-    </footer>
-    
+
     <script src="data.js"></script>
     <script src="calculator.js"></script>
+    <script src="screenshot.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
