@@ -191,7 +191,7 @@ class AnimeEternalCalculator {
             if (timeToKill === Infinity) {
                 category = 'impossible';
                 recommendation = 'Cannot kill this mob with current DPS';
-            } else if (timeToKill < 0.15) {
+            } else if (timeToKill <= 0.2) {
                 category = 'excellent';
                 recommendation = 'Perfect for farming - instant kill';
             } else if (effectiveTime <= 10) {
@@ -380,7 +380,9 @@ class AnimeEternalCalculator {
                 coinMultiplier = 1,
                 soulsMultiplier = 1,
                 baseCoinsBonus = 0,
-                farmType = 3
+                farmType = 3,
+                upgradeDropsMultiplier = 1,
+                avatarSoulsUpgradeMultiplier = 1
             } = config;
 
             if (typeof userDPS !== 'number' || userDPS <= 0) {
@@ -437,8 +439,8 @@ class AnimeEternalCalculator {
             const totalExp = totalKills * baseExpPerKill * Math.max(0, expMultiplier);
             const totalCoins = totalKills * baseCoinsPerKill * Math.max(0, coinMultiplier);
 
-            const tokenDrops = this.calculateTokenDrops(totalKills);
-            const soulDrops = this.calculateAvatarSoulDrops(totalKills, soulsMultiplier);
+            const tokenDrops = this.calculateTokenDrops(totalKills, upgradeDropsMultiplier);
+            const soulDrops = this.calculateAvatarSoulDrops(totalKills, soulsMultiplier, avatarSoulsUpgradeMultiplier);
 
             const expPerHour = totalExp / farmingHours;
             const coinsPerHour = totalCoins / farmingHours;
@@ -484,7 +486,9 @@ class AnimeEternalCalculator {
                     exp: expMultiplier,
                     coins: coinMultiplier,
                     souls: soulsMultiplier,
-                    baseCoins: baseCoinsBonus
+                    baseCoins: baseCoinsBonus,
+                    upgradeDrops: upgradeDropsMultiplier,
+                    avatarSoulsUpgrade: avatarSoulsUpgradeMultiplier
                 }
             };
         } catch (error) {
@@ -633,11 +637,15 @@ class AnimeEternalCalculator {
         }
     }
 
-    calculateTokenDrops(totalKills) {
+    calculateTokenDrops(totalKills, upgradeDropsMultiplier = 1) {
         try {
             if (typeof totalKills !== 'number' || totalKills < 0) {
                 console.warn('calculateTokenDrops: Invalid totalKills value');
                 return { min: 0, max: 0, average: 0 };
+            }
+
+            if (typeof upgradeDropsMultiplier !== 'number' || upgradeDropsMultiplier < 0) {
+                upgradeDropsMultiplier = 1;
             }
 
             if (typeof dropRates === 'undefined' || !dropRates.tokens) {
@@ -655,9 +663,9 @@ class AnimeEternalCalculator {
             const expectedDrops = totalKills * baseChance;
             
             return {
-                min: Math.max(0, Math.floor(expectedDrops * min)),
-                max: Math.max(0, Math.ceil(expectedDrops * max)),
-                average: Math.max(0, Math.round(expectedDrops * average))
+                min: Math.max(0, Math.floor(expectedDrops * min * upgradeDropsMultiplier)),
+                max: Math.max(0, Math.ceil(expectedDrops * max * upgradeDropsMultiplier)),
+                average: Math.max(0, Math.round(expectedDrops * average * upgradeDropsMultiplier))
             };
         } catch (error) {
             console.error('Error calculating token drops:', error);
@@ -665,7 +673,7 @@ class AnimeEternalCalculator {
         }
     }
 
-    calculateAvatarSoulDrops(totalKills, soulsMultiplier = 1) {
+    calculateAvatarSoulDrops(totalKills, soulsMultiplier = 1, avatarSoulsUpgradeMultiplier = 1) {
         try {
             if (typeof totalKills !== 'number' || totalKills < 0) {
                 console.warn('calculateAvatarSoulDrops: Invalid totalKills value');
@@ -674,6 +682,10 @@ class AnimeEternalCalculator {
 
             if (typeof soulsMultiplier !== 'number' || soulsMultiplier < 0) {
                 soulsMultiplier = 1;
+            }
+
+            if (typeof avatarSoulsUpgradeMultiplier !== 'number' || avatarSoulsUpgradeMultiplier < 0) {
+                avatarSoulsUpgradeMultiplier = 1;
             }
 
             if (typeof dropRates === 'undefined' || !dropRates.avatarSouls) {
@@ -688,7 +700,7 @@ class AnimeEternalCalculator {
                 return { min: 0, max: 0, average: 0 };
             }
 
-            const expectedDrops = totalKills * baseChance * soulsMultiplier;
+            const expectedDrops = totalKills * baseChance * soulsMultiplier * avatarSoulsUpgradeMultiplier;
             
             return {
                 min: Math.max(0, Math.floor(expectedDrops * min)),
@@ -1334,405 +1346,6 @@ class AnimeEternalCalculator {
         } catch (error) {
             console.error('Error getting cache size:', error);
             return 0;
-        }
-    }
-
-    calculateMultipleScenarios(baseConfig, variations) {
-        const results = [];
-        
-        try {
-            if (!baseConfig || typeof baseConfig !== 'object') {
-                return [{ scenario: 'Error', result: { valid: false, error: 'Invalid base configuration' } }];
-            }
-
-            if (!Array.isArray(variations)) {
-                return [{ scenario: 'Error', result: { valid: false, error: 'Invalid variations array' } }];
-            }
-            
-            variations.forEach((variation, index) => {
-                try {
-                    const config = { ...baseConfig, ...variation };
-                    let result;
-                    
-                    switch (config.type) {
-                        case 'farming':
-                            result = this.calculateFarmingEfficiency(config);
-                            break;
-                        case 'level':
-                            result = this.calculateLevelProgressWithAutoBestMob(config);
-                            break;
-                        case 'rank':
-                            result = this.calculateRankUpProgress(config);
-                            break;
-                        default:
-                            result = { valid: false, error: 'Unknown calculation type: ' + config.type };
-                    }
-                    
-                    results.push({
-                        scenario: variation.name || `Scenario ${index + 1}`,
-                        config: config,
-                        result: result
-                    });
-                } catch (error) {
-                    console.error('Error in scenario calculation:', error);
-                    results.push({
-                        scenario: variation.name || `Scenario ${index + 1}`,
-                        config: { ...baseConfig, ...variation },
-                        result: { valid: false, error: 'Calculation error: ' + error.message }
-                    });
-                }
-            });
-        } catch (error) {
-            console.error('Error in calculateMultipleScenarios:', error);
-            results.push({
-                scenario: 'Critical Error',
-                result: { valid: false, error: 'Critical error in batch calculation' }
-            });
-        }
-        
-        return results;
-    }
-
-    searchMobs(criteria) {
-        try {
-            if (!criteria || typeof criteria !== 'object') {
-                return this.gameData.filter(mob => mob && mob.name);
-            }
-
-            const {
-                namePattern,
-                worldFilter,
-                rankFilter,
-                minHP,
-                maxHP,
-                minExp,
-                maxExp,
-                farmableWithDPS
-            } = criteria;
-
-            let filteredMobs = this.gameData.filter(mob => mob && mob.name);
-
-            if (namePattern && typeof namePattern === 'string') {
-                try {
-                    const pattern = new RegExp(namePattern, 'i');
-                    filteredMobs = filteredMobs.filter(mob => 
-                        mob.name && typeof mob.name === 'string' && pattern.test(mob.name)
-                    );
-                } catch (regexError) {
-                    console.warn('Invalid regex pattern, using string includes instead');
-                    const normalizedPattern = namePattern.toLowerCase();
-                    filteredMobs = filteredMobs.filter(mob => 
-                        mob.name && typeof mob.name === 'string' && 
-                        mob.name.toLowerCase().includes(normalizedPattern)
-                    );
-                }
-            }
-
-            if (worldFilter && typeof worldFilter === 'string') {
-                filteredMobs = filteredMobs.filter(mob => mob.world === worldFilter);
-            }
-
-            if (rankFilter && typeof rankFilter === 'string') {
-                filteredMobs = filteredMobs.filter(mob => mob.rank === rankFilter);
-            }
-
-            if (typeof minHP === 'number' && minHP >= 0) {
-                filteredMobs = filteredMobs.filter(mob => typeof mob.hp === 'number' && mob.hp >= minHP);
-            }
-
-            if (typeof maxHP === 'number' && maxHP >= 0) {
-                filteredMobs = filteredMobs.filter(mob => typeof mob.hp === 'number' && mob.hp <= maxHP);
-            }
-
-            if (typeof minExp === 'number' && minExp >= 0) {
-                filteredMobs = filteredMobs.filter(mob => typeof mob.exp === 'number' && mob.exp >= minExp);
-            }
-
-            if (typeof maxExp === 'number' && maxExp >= 0) {
-                filteredMobs = filteredMobs.filter(mob => typeof mob.exp === 'number' && mob.exp <= maxExp);
-            }
-
-            if (typeof farmableWithDPS === 'number' && farmableWithDPS > 0) {
-                filteredMobs = filteredMobs.filter(mob => {
-                    try {
-                        const killTime = this.calculateTimeToKill(farmableWithDPS, mob.hp);
-                        const effectiveTime = killTime + this.respawnTime;
-                        return effectiveTime <= 300 && killTime !== Infinity;
-                    } catch (error) {
-                        console.warn('Error checking farmability for mob:', mob.name, error);
-                        return false;
-                    }
-                });
-            }
-
-            return filteredMobs;
-        } catch (error) {
-            console.error('Error in searchMobs:', error);
-            return [];
-        }
-    }
-
-    getPerformanceStats() {
-        try {
-            const farmableWorlds = [...new Set(this.gameData.filter(mob => {
-                try {
-                    return mob && 
-                           mob.world && 
-                           !mob.world.includes('Raid') && 
-                           !mob.world.includes('Defense');
-                } catch (error) {
-                    return false;
-                }
-            }).map(mob => mob.world))];
-
-            return {
-                cacheSize: this.getCacheSize(),
-                lastCalculationTime: this.lastCalculationTime,
-                totalMobs: this.gameData.length,
-                farmableWorlds: farmableWorlds.length,
-                maxCacheSize: this.maxCacheSize,
-                cacheExpiryTime: this.cacheExpiryTime,
-                memoryUsage: this.estimateMemoryUsage()
-            };
-        } catch (error) {
-            console.error('Error getting performance stats:', error);
-            return {
-                cacheSize: 0,
-                lastCalculationTime: 0,
-                totalMobs: 0,
-                farmableWorlds: 0,
-                error: 'Unable to calculate performance stats'
-            };
-        }
-    }
-
-    estimateMemoryUsage() {
-        try {
-            let totalSize = 0;
-            for (const [key, value] of this.calculationCache) {
-                totalSize += key.length * 2;
-                totalSize += 16;
-            }
-            return totalSize;
-        } catch (error) {
-            console.error('Error estimating memory usage:', error);
-            return 0;
-        }
-    }
-
-    compareMobs(mobNames, userDPS, config = {}) {
-        const comparison = [];
-        
-        try {
-            if (!Array.isArray(mobNames)) {
-                return comparison;
-            }
-
-            if (typeof userDPS !== 'number' || userDPS <= 0) {
-                return comparison.concat(mobNames.map(name => ({
-                    name: name,
-                    error: 'Invalid DPS value'
-                })));
-            }
-            
-            mobNames.forEach(mobName => {
-                try {
-                    if (!mobName || typeof mobName !== 'string') {
-                        comparison.push({
-                            name: 'Invalid',
-                            error: 'Invalid mob name'
-                        });
-                        return;
-                    }
-
-                    const mob = this.gameData.find(m => m && m.name === mobName);
-                    if (!mob) {
-                        comparison.push({
-                            name: mobName,
-                            error: 'Mob not found'
-                        });
-                        return;
-                    }
-
-                    const timeToKill = this.calculateTimeToKill(userDPS, mob.hp);
-                    const effectiveTime = timeToKill + this.respawnTime;
-                    const efficiency = this.analyzeMobEfficiency(userDPS, mob);
-                    const farmMultiplier = mob.rank === 'SS' ? 1 : Math.max(1, parseInt(config.farmType) || 3);
-                    
-                    const expPerHour = effectiveTime > 0 && effectiveTime !== Infinity ? 
-                        (mob.exp * (config.expMultiplier || 1) * farmMultiplier * 3600) / effectiveTime : 0;
-                    const coinsPerHour = effectiveTime > 0 && effectiveTime !== Infinity ? 
-                        (mob.coins * (config.coinMultiplier || 1) * farmMultiplier * 3600) / effectiveTime : 0;
-
-                    comparison.push({
-                        ...mob,
-                        timeToKill,
-                        effectiveTime,
-                        timeToKillFormatted: formatTime(timeToKill),
-                        effectiveTimeFormatted: formatTime(effectiveTime),
-                        efficiency,
-                        expPerHour,
-                        coinsPerHour,
-                        farmMultiplier,
-                        farmable: effectiveTime <= 300 && timeToKill !== Infinity
-                    });
-                } catch (error) {
-                    console.error('Error comparing mob:', mobName, error);
-                    comparison.push({
-                        name: mobName,
-                        error: 'Calculation error: ' + error.message
-                    });
-                }
-            });
-
-            comparison.sort((a, b) => {
-                if (a.error && !b.error) return 1;
-                if (!a.error && b.error) return -1;
-                if (a.error && b.error) return 0;
-                return (b.expPerHour || 0) - (a.expPerHour || 0);
-            });
-        } catch (error) {
-            console.error('Error in compareMobs:', error);
-        }
-
-        return comparison;
-    }
-
-    analyzeWorldProgression(userDPS) {
-        try {
-            if (typeof userDPS !== 'number' || userDPS <= 0) {
-                console.warn('analyzeWorldProgression: Invalid DPS value');
-                return [];
-            }
-
-            const worlds = [...new Set(this.gameData
-                .filter(mob => mob && mob.world)
-                .map(mob => mob.world))];
-            
-            const progression = [];
-
-            worlds.forEach(world => {
-                try {
-                    const worldMobs = this.getMobsByWorld(world);
-                    const farmableMobs = worldMobs.filter(mob => {
-                        try {
-                            const killTime = this.calculateTimeToKill(userDPS, mob.hp);
-                            const effectiveTime = killTime + this.respawnTime;
-                            return effectiveTime <= 300 && killTime !== Infinity;
-                        } catch (error) {
-                            console.warn('Error checking farmability in world progression:', mob?.name, error);
-                            return false;
-                        }
-                    });
-
-                    const strongestFarmable = farmableMobs.reduce((strongest, mob) => {
-                        return (!strongest || (mob.hp > strongest.hp)) ? mob : strongest;
-                    }, null);
-
-                    const worldCategory = world.includes('Raid') ? 'raid' : 
-                                         world.includes('Defense') ? 'defense' : 'normal';
-
-                    const progressPercentage = worldMobs.length > 0 ? 
-                        (farmableMobs.length / worldMobs.length) * 100 : 0;
-
-                    progression.push({
-                        world,
-                        category: worldCategory,
-                        totalMobs: worldMobs.length,
-                        farmableMobs: farmableMobs.length,
-                        strongestFarmable,
-                        accessLevel: farmableMobs.length > 0 ? 'accessible' : 'not-accessible',
-                        progressPercentage: progressPercentage
-                    });
-                } catch (error) {
-                    console.error('Error analyzing world:', world, error);
-                    progression.push({
-                        world,
-                        category: 'unknown',
-                        totalMobs: 0,
-                        farmableMobs: 0,
-                        strongestFarmable: null,
-                        accessLevel: 'error',
-                        progressPercentage: 0,
-                        error: error.message
-                    });
-                }
-            });
-
-            progression.sort((a, b) => {
-                if (a.error && !b.error) return 1;
-                if (!a.error && b.error) return -1;
-                
-                if (a.category !== b.category) {
-                    const categoryOrder = { normal: 0, raid: 1, defense: 2 };
-                    return (categoryOrder[a.category] || 999) - (categoryOrder[b.category] || 999);
-                }
-                return b.progressPercentage - a.progressPercentage;
-            });
-
-            return progression;
-        } catch (error) {
-            console.error('Error in analyzeWorldProgression:', error);
-            return [];
-        }
-    }
-
-    exportConfiguration(config) {
-        try {
-            const exportData = {
-                version: '2.0',
-                timestamp: Date.now(),
-                config: config,
-                gameDataVersion: this.gameData.length,
-                calculatorVersion: 'Enhanced'
-            };
-            return JSON.stringify(exportData, null, 2);
-        } catch (error) {
-            console.error('Error exporting configuration:', error);
-            return JSON.stringify({
-                version: '2.0',
-                timestamp: Date.now(),
-                error: 'Export failed: ' + error.message
-            });
-        }
-    }
-
-    importConfiguration(configString) {
-        try {
-            if (typeof configString !== 'string' || configString.trim().length === 0) {
-                return {
-                    valid: false,
-                    error: 'Invalid configuration string'
-                };
-            }
-
-            const importData = JSON.parse(configString);
-            
-            if (!importData.version || !importData.config) {
-                return {
-                    valid: false,
-                    error: 'Invalid configuration format - missing required fields'
-                };
-            }
-
-            const supportedVersions = ['1.0', '2.0'];
-            if (!supportedVersions.includes(importData.version)) {
-                console.warn('Importing potentially incompatible version:', importData.version);
-            }
-
-            return {
-                valid: true,
-                config: importData.config,
-                timestamp: importData.timestamp,
-                version: importData.version,
-                compatibility: supportedVersions.includes(importData.version) ? 'full' : 'partial'
-            };
-        } catch (error) {
-            console.error('Error importing configuration:', error);
-            return {
-                valid: false,
-                error: 'Import failed: ' + error.message
-            };
         }
     }
 }
