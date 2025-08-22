@@ -1409,7 +1409,7 @@ class AnimeEternalApp {
         const container = document.getElementById('raid-range-buttons');
         if (!container || typeof calculator === 'undefined') return;
         
-        const maxWaves = 1000;
+        const maxWaves = 2000;
         const ranges = calculator.generateRaidWaveRanges(raidType, maxWaves);
         container.innerHTML = '';
         
@@ -1865,3 +1865,4 @@ window.addEventListener('error', (event) => {
 window.addEventListener('unhandledrejection', (event) => {
     console.error('Unhandled promise rejection:', event.reason);
 });
+
