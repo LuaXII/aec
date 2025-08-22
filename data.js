@@ -1,333 +1,421 @@
-const xpTable = [
-    { level: 1, xpRequired: 0 },
-    { level: 2, xpRequired: 10 },
-    { level: 3, xpRequired: 21 },
-    { level: 4, xpRequired: 33 },
-    { level: 5, xpRequired: 46 },
-    { level: 6, xpRequired: 61 },
-    { level: 7, xpRequired: 77 },
-    { level: 8, xpRequired: 95 },
-    { level: 9, xpRequired: 115 },
-    { level: 10, xpRequired: 137 },
-    { level: 11, xpRequired: 161 },
-    { level: 12, xpRequired: 187 },
-    { level: 13, xpRequired: 216 },
-    { level: 14, xpRequired: 248 },
-    { level: 15, xpRequired: 283 },
-    { level: 16, xpRequired: 321 },
-    { level: 17, xpRequired: 363 },
-    { level: 18, xpRequired: 409 },
-    { level: 19, xpRequired: 460 },
-    { level: 20, xpRequired: 516 },
-    { level: 21, xpRequired: 578 },
-    { level: 22, xpRequired: 646 },
-    { level: 23, xpRequired: 721 },
-    { level: 24, xpRequired: 803 },
-    { level: 25, xpRequired: 893 },
-    { level: 26, xpRequired: 992 },
-    { level: 27, xpRequired: 1101 },
-    { level: 28, xpRequired: 1221 },
-    { level: 29, xpRequired: 1353 },
-    { level: 30, xpRequired: 1498 },
-    { level: 31, xpRequired: 1658 },
-    { level: 32, xpRequired: 1834 },
-    { level: 33, xpRequired: 2027 },
-    { level: 34, xpRequired: 2240 },
-    { level: 35, xpRequired: 2474 },
-    { level: 36, xpRequired: 2731 },
-    { level: 37, xpRequired: 3014 },
-    { level: 38, xpRequired: 3325 },
-    { level: 39, xpRequired: 3668 },
-    { level: 40, xpRequired: 4045 },
-    { level: 41, xpRequired: 4460 },
-    { level: 42, xpRequired: 4916 },
-    { level: 43, xpRequired: 5418 },
-    { level: 44, xpRequired: 5970 },
-    { level: 45, xpRequired: 6577 },
-    { level: 46, xpRequired: 7245 },
-    { level: 47, xpRequired: 7980 },
-    { level: 48, xpRequired: 8788 },
-    { level: 49, xpRequired: 9677 },
-    { level: 50, xpRequired: 10655 },
-    { level: 51, xpRequired: 11731 },
-    { level: 52, xpRequired: 12914 },
-    { level: 53, xpRequired: 14215 },
-    { level: 54, xpRequired: 15647 },
-    { level: 55, xpRequired: 17222 },
-    { level: 56, xpRequired: 18954 },
-    { level: 57, xpRequired: 20859 },
-    { level: 58, xpRequired: 22955 },
-    { level: 59, xpRequired: 25261 },
-    { level: 60, xpRequired: 27797 },
-    { level: 61, xpRequired: 30587 },
-    { level: 62, xpRequired: 33656 },
-    { level: 63, xpRequired: 37032 },
-    { level: 64, xpRequired: 40745 },
-    { level: 65, xpRequired: 44830 },
-    { level: 66, xpRequired: 49323 },
-    { level: 67, xpRequired: 54265 },
-    { level: 68, xpRequired: 59702 },
-    { level: 69, xpRequired: 65682 },
-    { level: 70, xpRequired: 72260 },
-    { level: 71, xpRequired: 79496 },
-    { level: 72, xpRequired: 87456 },
-    { level: 73, xpRequired: 96212 },
-    { level: 74, xpRequired: 105843 },
-    { level: 75, xpRequired: 116437 },
-    { level: 76, xpRequired: 128091 },
-    { level: 77, xpRequired: 140910 },
-    { level: 78, xpRequired: 155011 },
-    { level: 79, xpRequired: 170522 },
-    { level: 80, xpRequired: 187584 },
-    { level: 81, xpRequired: 206352 },
-    { level: 82, xpRequired: 226997 },
-    { level: 83, xpRequired: 249707 },
-    { level: 84, xpRequired: 274688 },
-    { level: 85, xpRequired: 302167 },
-    { level: 86, xpRequired: 332394 },
-    { level: 87, xpRequired: 365643 },
-    { level: 88, xpRequired: 402217 },
-    { level: 89, xpRequired: 442449 },
-    { level: 90, xpRequired: 486704 },
-    { level: 91, xpRequired: 535384 },
-    { level: 92, xpRequired: 588932 },
-    { level: 93, xpRequired: 647835 },
-    { level: 94, xpRequired: 712629 },
-    { level: 95, xpRequired: 783902 },
-    { level: 96, xpRequired: 862302 },
-    { level: 97, xpRequired: 948542 },
-    { level: 98, xpRequired: 1043406 },
-    { level: 99, xpRequired: 1147757 },
-    { level: 100, xpRequired: 1262543 },
-    { level: 101, xpRequired: 1388807 },
-    { level: 102, xpRequired: 1527698 },
-    { level: 103, xpRequired: 1680478 },
-    { level: 104, xpRequired: 1848536 },
-    { level: 105, xpRequired: 2033400 },
-    { level: 106, xpRequired: 2236750 },
-    { level: 107, xpRequired: 2460435 },
-    { level: 108, xpRequired: 2706489 },
-    { level: 109, xpRequired: 2977148 },
-    { level: 110, xpRequired: 3274873 },
-    { level: 111, xpRequired: 3602370 },
-    { level: 112, xpRequired: 3962617 },
-    { level: 113, xpRequired: 4358889 },
-    { level: 114, xpRequired: 4794788 },
-    { level: 115, xpRequired: 5274277 },
-    { level: 116, xpRequired: 5801715 },
-    { level: 117, xpRequired: 6381897 },
-    { level: 118, xpRequired: 7020097 },
-    { level: 119, xpRequired: 7722117 },
-    { level: 120, xpRequired: 8494339 },
-    { level: 121, xpRequired: 9343783 },
-    { level: 122, xpRequired: 10278171 },
-    { level: 123, xpRequired: 11305998 },
-    { level: 124, xpRequired: 12436608 },
-    { level: 125, xpRequired: 13680279 },
-    { level: 126, xpRequired: 15048317 },
-    { level: 127, xpRequired: 16553159 },
-    { level: 128, xpRequired: 18208485 },
-    { level: 129, xpRequired: 20029344 },
-    { level: 130, xpRequired: 22032288 },
-    { level: 131, xpRequired: 24235527 },
-    { level: 132, xpRequired: 26659090 },
-    { level: 133, xpRequired: 29325009 },
-    { level: 134, xpRequired: 32257520 },
-    { level: 135, xpRequired: 35483282 },
-    { level: 136, xpRequired: 39031620 },
-    { level: 137, xpRequired: 42934792 },
-    { level: 138, xpRequired: 47228281 },
-    { level: 139, xpRequired: 51951119 },
-    { level: 140, xpRequired: 57146241 },
-    { level: 141, xpRequired: 62860875 },
-    { level: 142, xpRequired: 69146973 },
-    { level: 143, xpRequired: 76061680 },
-    { level: 144, xpRequired: 83667858 },
-    { level: 145, xpRequired: 92034654 },
-    { level: 146, xpRequired: 101238129 },
-    { level: 147, xpRequired: 111361952 },
-    { level: 148, xpRequired: 122498157 },
-    { level: 149, xpRequired: 134747983 },
-    { level: 150, xpRequired: 148222791 },
-    { level: 151, xpRequired: 163045080 },
-    { level: 152, xpRequired: 179349598 },
-    { level: 153, xpRequired: 197284568 },
-    { level: 154, xpRequired: 217013035 },
-    { level: 155, xpRequired: 238714349 },
-    { level: 156, xpRequired: 262585794 },
-    { level: 157, xpRequired: 288844383 },
-    { level: 158, xpRequired: 317728831 },
-    { level: 159, xpRequired: 349501724 },
-    { level: 160, xpRequired: 384451906 },
-    { level: 161, xpRequired: 422897107 },
-    { level: 162, xpRequired: 465186828 },
-    { level: 163, xpRequired: 511705521 },
-    { level: 164, xpRequired: 562876083 },
-    { level: 165, xpRequired: 619163701 },
-    { level: 166, xpRequired: 681080081 },
-    { level: 167, xpRequired: 749188099 },
-    { level: 168, xpRequired: 824106919 },
-    { level: 169, xpRequired: 906517621 },
-    { level: 170, xpRequired: 997169393 },
-    { level: 171, xpRequired: 1096886342 },
-    { level: 172, xpRequired: 1206574986 },
-    { level: 173, xpRequired: 1327232495 },
-    { level: 174, xpRequired: 1459955755 },
-    { level: 175, xpRequired: 1605951341 },
-    { level: 176, xpRequired: 1766546485 },
-    { level: 177, xpRequired: 1943201144 },
-    { level: 178, xpRequired: 2137521268 },
-    { level: 179, xpRequired: 2351273405 },
-    { level: 180, xpRequired: 2586400756 },
-    { level: 181, xpRequired: 2845040842 },
-    { level: 182, xpRequired: 3129544936 },
-    { level: 183, xpRequired: 3442499440 },
-    { level: 184, xpRequired: 3786749394 },
-    { level: 185, xpRequired: 4165424343 },
-    { level: 186, xpRequired: 4581966787 },
-    { level: 187, xpRequired: 5040163476 },
-    { level: 188, xpRequired: 5544179834 },
-    { level: 189, xpRequired: 6098597827 },
-    { level: 190, xpRequired: 6708457620 },
-    { level: 191, xpRequired: 7379303392 },
-    { level: 192, xpRequired: 8117233741 },
-    { level: 193, xpRequired: 8928957125 },
-    { level: 194, xpRequired: 9821852848 },
-    { level: 195, xpRequired: 10804038143 },
-    { level: 196, xpRequired: 11884441967 },
-    { level: 197, xpRequired: 13072886174 },
-    { level: 198, xpRequired: 14380174801 },
-    { level: 199, xpRequired: 15818192291 },
-    { level: 200, xpRequired: 17400011530 },
-    { level: 201, xpRequired: 19140012693 },
-    { level: 202, xpRequired: 21054013972 },
-    { level: 203, xpRequired: 23159415379 },
-    { level: 204, xpRequired: 25475356927 },
-    { level: 205, xpRequired: 28022892630 },
-    { level: 206, xpRequired: 30825181903 },
-    { level: 207, xpRequired: 33907700103 },
-    { level: 208, xpRequired: 37298470123 },
-    { level: 209, xpRequired: 41028317145 },
-    { level: 210, xpRequired: 45131148870 },
-    { level: 211, xpRequired: 49644263767 },
-    { level: 212, xpRequired: 54608690154 },
-    { level: 213, xpRequired: 60069559179 },
-    { level: 214, xpRequired: 66076515107 },
-    { level: 215, xpRequired: 72684166628 },
-    { level: 216, xpRequired: 79952583301 },
-    { level: 217, xpRequired: 87947841641 },
-    { level: 218, xpRequired: 96742625815 },
-    { level: 219, xpRequired: 106416888407 },
-    { level: 220, xpRequired: 117058577258 },
-    { level: 221, xpRequired: 128764434994 },
-    { level: 222, xpRequired: 141640878503 },
-    { level: 223, xpRequired: 155804966363 },
-    { level: 224, xpRequired: 171385463009 },
-    { level: 225, xpRequired: 188524009320 },
-    { level: 226, xpRequired: 207376410262 },
-    { level: 227, xpRequired: 228114051298 },
-    { level: 228, xpRequired: 250925456438 },
-    { level: 229, xpRequired: 276018002092 },
-    { level: 230, xpRequired: 303619802311 }
-];
+(function() {
+    'use strict';
+    
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        return false;
+    });
+    
+    document.addEventListener('keydown', function(e) {
+        if (e.keyCode === 123 || 
+            (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) ||
+            (e.ctrlKey && e.keyCode === 85)) {
+            e.preventDefault();
+            return false;
+        }
+    });
+    
+    let devtools = {
+        open: false,
+        orientation: null
+    };
+    
+    setInterval(function() {
+        if (window.outerHeight - window.innerHeight > 160 || window.outerWidth - window.innerWidth > 160) {
+            if (!devtools.open) {
+                devtools.open = true;
+                document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-size:24px;color:#fff;background:#000;">Access Denied</div>';
+            }
+        }
+    }, 500);
+    
+    document.addEventListener('selectstart', function(e) {
+        e.preventDefault();
+        return false;
+    });
+    
+    setInterval(function() {
+        console.clear();
+    }, 1000);
+})();
 
-const rankData = [
-    { currentRank: 1, nextRank: 2, energyRequired: 9000, energyMultiplier: 1.0 },
-    { currentRank: 2, nextRank: 3, energyRequired: 245000, energyMultiplier: 2.0 },
-    { currentRank: 3, nextRank: 4, energyRequired: 1300000, energyMultiplier: 4.0 },
-    { currentRank: 4, nextRank: 5, energyRequired: 3700000, energyMultiplier: 8.0 },
-    { currentRank: 5, nextRank: 6, energyRequired: 13600000, energyMultiplier: 16.0 },
-    { currentRank: 6, nextRank: 7, energyRequired: 150000000, energyMultiplier: 32.0 },
-    { currentRank: 7, nextRank: 8, energyRequired: 1100000000, energyMultiplier: 64.0 },
-    { currentRank: 8, nextRank: 9, energyRequired: 13000000000, energyMultiplier: 128.0 },
-    { currentRank: 9, nextRank: 10, energyRequired: 27000000000, energyMultiplier: 256.0 },
-    { currentRank: 10, nextRank: 11, energyRequired: 350000000000, energyMultiplier: 512.0 },
-    { currentRank: 11, nextRank: 12, energyRequired: 825000000000, energyMultiplier: 1024.0 },
-    { currentRank: 12, nextRank: 13, energyRequired: 1.47e12, energyMultiplier: 2048.0 },
-    { currentRank: 13, nextRank: 14, energyRequired: 3.9e12, energyMultiplier: 4096.0 },
-    { currentRank: 14, nextRank: 15, energyRequired: 22.5e12, energyMultiplier: 8192.0 },
-    { currentRank: 15, nextRank: 16, energyRequired: 211e12, energyMultiplier: 16384.0 },
-    { currentRank: 16, nextRank: 17, energyRequired: 2.99e15, energyMultiplier: 32768.0 },
-    { currentRank: 17, nextRank: 18, energyRequired: 499e15, energyMultiplier: 65536.0 },
-    { currentRank: 18, nextRank: 19, energyRequired: 10e18, energyMultiplier: 131072.0 },
-    { currentRank: 19, nextRank: 20, energyRequired: 400e18, energyMultiplier: 262144.0 },
-    { currentRank: 20, nextRank: 21, energyRequired: 7.8e21, energyMultiplier: 524288.0 },
-    { currentRank: 21, nextRank: 22, energyRequired: 33e21, energyMultiplier: 1048576.0 },
-    { currentRank: 22, nextRank: 23, energyRequired: 495e21, energyMultiplier: 2097152.0 },
-    { currentRank: 23, nextRank: 24, energyRequired: 1.25e24, energyMultiplier: 4194304.0 },
-    { currentRank: 24, nextRank: 25, energyRequired: 14e24, energyMultiplier: 8388608.0 },
-    { currentRank: 25, nextRank: 26, energyRequired: 69e24, energyMultiplier: 16777216.0 },
-    { currentRank: 26, nextRank: 27, energyRequired: 475e24, energyMultiplier: 33554432.0 },
-    { currentRank: 27, nextRank: 28, energyRequired: 7.21e27, energyMultiplier: 67108864.0 },
-    { currentRank: 28, nextRank: 29, energyRequired: 39.8e27, energyMultiplier: 134217728.0 },
-    { currentRank: 29, nextRank: 30, energyRequired: 284e27, energyMultiplier: 268435456.0 },
-    { currentRank: 30, nextRank: 31, energyRequired: 769e27, energyMultiplier: 536870912.0 },
-    { currentRank: 31, nextRank: 32, energyRequired: 1.25e30, energyMultiplier: 1073741824.0 },
-    { currentRank: 32, nextRank: 33, energyRequired: 5e30, energyMultiplier: 2147483648.0 },
-    { currentRank: 33, nextRank: 34, energyRequired: 22.2e30, energyMultiplier: 4294967296.0 },
-    { currentRank: 34, nextRank: 35, energyRequired: 500e30, energyMultiplier: 8589934592.0 },
-    { currentRank: 35, nextRank: 36, energyRequired: 6.9e33, energyMultiplier: 17179869184.0 },
-    { currentRank: 36, nextRank: 37, energyRequired: 9.9e33, energyMultiplier: 34359738368.0 },
-    { currentRank: 37, nextRank: 38, energyRequired: 27.8e33, energyMultiplier: 68719476736.0 },
-    { currentRank: 38, nextRank: 39, energyRequired: 76.9e33, energyMultiplier: 137438953472.0 },
-    { currentRank: 39, nextRank: 40, energyRequired: 100e33, energyMultiplier: 274877906944.0 },
-    { currentRank: 40, nextRank: 41, energyRequired: 642e33, energyMultiplier: 549755813888.0 },
-    { currentRank: 41, nextRank: 42, energyRequired: 7e36, energyMultiplier: 1099511627776.0 },
-    { currentRank: 42, nextRank: 43, energyRequired: 80e36, energyMultiplier: 2199023255552.0 },
-    { currentRank: 43, nextRank: 44, energyRequired: 900e36, energyMultiplier: 4398046511104.0 },
-    { currentRank: 44, nextRank: 45, energyRequired: 1e39, energyMultiplier: 8796093022208.0 },
-    { currentRank: 45, nextRank: 46, energyRequired: 9.99e39, energyMultiplier: 17592186044416.0 },
-    { currentRank: 46, nextRank: 47, energyRequired: 85e39, energyMultiplier: 35184372088832.0 },
-    { currentRank: 47, nextRank: 48, energyRequired: 498e39, energyMultiplier: 70368744177664.0 },
-    { currentRank: 48, nextRank: 49, energyRequired: 5e42, energyMultiplier: 140737488355328.0 },
-    { currentRank: 49, nextRank: 50, energyRequired: 64.2e42, energyMultiplier: 281474976710656.0 },
-    { currentRank: 50, nextRank: 51, energyRequired: 500e42, energyMultiplier: 562949953421312.0 },
-    { currentRank: 51, nextRank: 52, energyRequired: 998e42, energyMultiplier: 1125899906842624.0 },
-    { currentRank: 52, nextRank: 53, energyRequired: 4e45, energyMultiplier: 2251799813685248.0 },
-    { currentRank: 53, nextRank: 54, energyRequired: 90e45, energyMultiplier: 4503599627370496.0 },
-    { currentRank: 54, nextRank: 55, energyRequired: 64.2e45, energyMultiplier: 9007199254740992.0 },
-    { currentRank: 55, nextRank: 56, energyRequired: 100e45, energyMultiplier: 18014398509481984.0 },
-    { currentRank: 56, nextRank: 57, energyRequired: 998e45, energyMultiplier: 36028797018963968.0 },
-    { currentRank: 57, nextRank: 58, energyRequired: 5e48, energyMultiplier: 72057594037927936.0 },
-    { currentRank: 58, nextRank: 59, energyRequired: 10e48, energyMultiplier: 144115188075855872.0 },
-    { currentRank: 59, nextRank: 60, energyRequired: 68.9e48, energyMultiplier: 288230376151711744.0 },
-    { currentRank: 60, nextRank: 61, energyRequired: 541e48, energyMultiplier: 576460752303423488.0 },
-    { currentRank: 61, nextRank: 62, energyRequired: 9e51, energyMultiplier: 1152921504606846976.0 },
-    { currentRank: 62, nextRank: 63, energyRequired: 200e51, energyMultiplier: 2305843009213693952.0 },
-    { currentRank: 63, nextRank: 64, energyRequired: 6.32e54, energyMultiplier: 4611686018427387904.0 },
-    { currentRank: 64, nextRank: 65, energyRequired: 91e54, energyMultiplier: 9223372036854775808.0 },
-    { currentRank: 65, nextRank: 66, energyRequired: 900e54, energyMultiplier: 18446744073709551616.0 },
-    { currentRank: 66, nextRank: 67, energyRequired: 4e57, energyMultiplier: 36893488147419103232.0 },
-    { currentRank: 67, nextRank: 68, energyRequired: 10e57, energyMultiplier: 73786976294838206464.0 },
-    { currentRank: 68, nextRank: 69, energyRequired: 50e57, energyMultiplier: 147573952589676412928.0 },
-    { currentRank: 69, nextRank: 70, energyRequired: 375e57, energyMultiplier: 295147905179352825856.0 },
-    { currentRank: 70, nextRank: 71, energyRequired: 1.1e60, energyMultiplier: 590295810358705651712.0 },
-    { currentRank: 71, nextRank: 72, energyRequired: 11e60, energyMultiplier: 1180591620717411303424.0 },
-    { currentRank: 72, nextRank: 73, energyRequired: 55e60, energyMultiplier: 2361183241434822606848.0 },
-    { currentRank: 73, nextRank: 74, energyRequired: 310e60, energyMultiplier: 4722366482869645213696.0 },
-    { currentRank: 74, nextRank: 75, energyRequired: 10e63, energyMultiplier: 9444732965739290427392.0 },
-    { currentRank: 75, nextRank: null, energyRequired: null, energyMultiplier: 18889465931478580854784.0 }
-];
+const xpRequiredForLevel = Object.freeze([
+    0, 0, 10, 21, 33, 46, 61, 77, 95, 115, 137, 161, 187, 216, 248, 283, 321, 363, 409, 460, 516, 
+    578, 646, 721, 803, 893, 992, 1101, 1221, 1353, 1498, 1658, 1834, 2027, 2240, 2474, 2731, 3014, 
+    3325, 3668, 4045, 4460, 4916, 5418, 5970, 6577, 7245, 7980, 8788, 9677, 10655, 11731, 12914, 
+    14215, 15647, 17222, 18954, 20859, 22955, 25261, 27797, 30587, 33656, 37032, 40745, 44830, 49323, 
+    54265, 59702, 65682, 72260, 79496, 87456, 96212, 105843, 116437, 128091, 140910, 155011, 170522, 
+    187584, 206352, 226997, 249707, 274688, 302167, 332394, 365643, 402217, 442449, 486704, 535384, 
+    588932, 647835, 712629, 783902, 862302, 948542, 1043406, 1147757, 1262543, 1388807, 1527698, 
+    1680478, 1848536, 2033400, 2236750, 2460435, 2706489, 2977148, 3274873, 3602370, 3962617, 4358889, 
+    4794788, 5274277, 5801715, 6381897, 7020097, 7722117, 8494339, 9343783, 10278171, 11305998, 
+    12436608, 13680279, 15048317, 16553159, 18208485, 20029344, 22032288, 24235527, 26659090, 29325009, 
+    32257520, 35483282, 39031620, 42934792, 47228281, 51951119, 57146241, 62860875, 69146973, 76061680, 
+    83667858, 92034654, 101238129, 111361952, 122498157, 134747983, 148222791, 163045080, 179349598, 
+    197284568, 217013035, 238714349, 262585794, 288844383, 317728831, 349501724, 384451906, 422897107, 
+    465186828, 511705521, 562876083, 619163701, 681080081, 749188099, 824106919, 906517621, 997169393, 
+    1096886342, 1206574986, 1327232495, 1459955755, 1605951341, 1766546485, 1943201144, 2137521268, 
+    2351273405, 2586400756, 2845040842, 3129544936, 3442499440, 3786749394, 4165424343, 4581966787, 
+    5040163476, 5544179834, 6098597827, 6708457620, 7379303392, 8117233741, 8928957125, 9821852848, 
+    10804038143, 11884441967, 13072886174, 14380174801, 15818192291, 17400011530, 19140012693, 
+    21054013972, 23159415379, 25475356927, 28022892630, 30825181903, 33907700103, 37298470123, 
+    41028317145, 45131148870, 49644263767, 54608690154, 60069559179, 66076515107, 72684166628, 
+    79952583301, 87947841641, 96742625815, 106416888407, 117058577258, 128764434994, 141640878503, 
+    155804966363, 171385463009, 188524009320, 207376410262, 228114051298, 250925456438, 276018002092, 
+    303619802311
+]);
 
-const prestigeConfig = {
+const energyRequiredForRank = Object.freeze([
+    null, 9000, 245000, 1300000, 3700000, 13600000, 150000000, 1100000000, 13000000000, 27000000000, 
+    350000000000, 825000000000, 1.47e12, 3.9e12, 22.5e12, 211e12, 2.99e15, 499e15, 10e18, 400e18, 
+    7.8e21, 33e21, 495e21, 1.25e24, 14e24, 69e24, 475e24, 7.21e27, 39.8e27, 284e27, 769e27, 1.25e30, 
+    5e30, 22.2e30, 500e30, 6.9e33, 9.9e33, 27.8e33, 76.9e33, 100e33, 642e33, 7e36, 80e36, 900e36, 
+    1e39, 9.99e39, 85e39, 498e39, 5e42, 64.2e42, 500e42, 998e42, 4e45, 90e45, 64.2e45, 100e45, 
+    998e45, 5e48, 10e48, 68.9e48, 541e48, 9e51, 200e51, 6.32e54, 91e54, 900e54, 4e57, 10e57, 50e57, 
+    375e57, 1.1e60, 11e60, 55e60, 310e60, 1.1e63
+]);
+
+const numberSuffixes = Object.freeze([
+    "K", "M", "B", "T", "qd", "Qn", "sx", "Sp", "O", "N", "de", "Ud", "DD", "tdD", 
+    "qdD", "QnD", "sxD", "SpD", "OcD", "NvD", "Vgn", "UVg", "DVg", "TVg", "qtV", 
+    "QnV", "SeV", "SPG", "OcG", "NoG", "DcG", "TdG", "QdG", "QnG", "SxG", "SpG", 
+    "OtG", "NoA", "DcA", "TdA", "QdA", "QnA", "SxA", "SpA", "OtA", "NoS", "DcS", 
+    "TdS", "QdS", "QnS", "SxS", "SpS", "OtS", "NoP", "DcP", "TdP", "QdP", "QnP", 
+    "SxP", "SpP", "OtP", "NoE", "DcE", "TdE", "QdE", "QnE", "SxE", "SpE", "OtE", 
+    "NoZ", "DcZ", "TdZ", "QdZ", "QnZ", "SxZ", "SpZ", "OtZ", "NoY", "DcY", "TdY", 
+    "QdY", "QnY", "SxY", "SpY", "OtY", "NoX", "DcX", "TdX", "QdX", "QnX", "SxX", 
+    "SpX", "OtX", "NoW", "DcW", "TdW", "QdW", "QnW", "SxW", "SpW", "OtW", "NoV", 
+    "DcV", "TdV", "QdV", "QnV", "SxV", "SpV", "OtV", "NoU", "DcU", "TdU", "QdU", 
+    "QnU", "SxU", "SpU", "OtU", "NoT", "DcT", "TdT", "QdT", "QnT", "SxT", "SpT", 
+    "OtT", "NoR", "DcR", "TdR", "QdR", "QnR", "SxR", "SpR", "OtR", "NoQ", "DcQ", 
+    "TdQ", "QdQ", "QnQ", "SxQ", "SpQ", "OtQ"
+]);
+
+/**
+ * @param {number} num
+ * @returns {string}
+ */
+function formatNumber(num) {
+    if (num === 0 || !isFinite(num)) return "0";
+    
+    const absNum = Math.abs(num);
+    const isNegative = num < 0;
+    
+    if (absNum < 1000) {
+        return (isNegative ? "-" : "") + Math.round(absNum).toLocaleString();
+    }
+    
+    const suffixIndex = Math.floor(Math.log10(absNum) / 3) - 1;
+    
+    if (suffixIndex < 0 || suffixIndex >= numberSuffixes.length) {
+        return (isNegative ? "-" : "") + absNum.toExponential(2);
+    }
+    
+    const divisor = Math.pow(1000, suffixIndex + 1);
+    const displayNum = absNum / divisor;
+    
+    const suffix = numberSuffixes[suffixIndex];
+    
+    let formatted;
+    if (displayNum >= 100) {
+        formatted = Math.round(displayNum).toString();
+    } else if (displayNum >= 10) {
+        const rounded = Math.round(displayNum * 10) / 10;
+        formatted = rounded % 1 === 0 ? rounded.toString() : rounded.toFixed(1);
+    } else {
+        const rounded = Math.round(displayNum * 100) / 100;
+        formatted = rounded % 1 === 0 ? rounded.toString() : 
+                   (rounded * 10) % 1 === 0 ? rounded.toFixed(1) : rounded.toFixed(2);
+    }
+    
+    return (isNegative ? "-" : "") + formatted + suffix;
+}
+
+function getXpForLevel(level) {
+    if (level > 0 && level < xpRequiredForLevel.length) {
+        return xpRequiredForLevel[level];
+    }
+    return null;
+}
+
+function getMaxLevel() {
+    return xpRequiredForLevel.length - 1;
+}
+
+function getEnergyForRank(currentRank) {
+    if (currentRank > 0 && currentRank < energyRequiredForRank.length) {
+        return energyRequiredForRank[currentRank];
+    }
+    return null;
+}
+
+function getMaxRank() {
+    return energyRequiredForRank.length - 1;
+}
+
+function getMultiplierForRank(currentRank) {
+    if (currentRank < 1) return 0;
+    return Math.pow(2, currentRank - 1);
+}
+
+const xpTable = Object.freeze(
+    xpRequiredForLevel.slice(1).map((xpRequired, index) => ({
+        level: index + 1,
+        xpRequired: xpRequired
+    }))
+);
+
+const rankData = Object.freeze(
+    energyRequiredForRank.slice(1).map((energyRequired, index) => {
+        const currentRank = index + 1;
+        const maxRank = getMaxRank();
+        return {
+            currentRank: currentRank,
+            nextRank: currentRank < maxRank ? currentRank + 1 : null,
+            energyRequired: energyRequired,
+            energyMultiplier: getMultiplierForRank(currentRank)
+        };
+    })
+);
+
+const prestigeConfig = Object.freeze({
     0: { levelCap: 200, expMultiplier: 1.0 },
     1: { levelCap: 210, expMultiplier: 1.1 },
     2: { levelCap: 220, expMultiplier: 1.2 },
     3: { levelCap: 230, expMultiplier: 1.3 }
-};
+});
 
-const energyPotions = {
+const energyPotions = Object.freeze({
     none: { name: "None", multiplier: 1.0, duration: 0 },
     small: { name: "Small Energy Potion (+50%)", multiplier: 1.5, duration: 15 * 60 },
     large: { name: "Energy Potion (+100%)", multiplier: 2.0, duration: 15 * 60 }
-};
+});
 
-const expPotions = {
+const expPotions = Object.freeze({
     none: { name: "None", multiplier: 1.0, duration: 0 },
-    double: { name: "2x EXP Potion", multiplier: 2.0, duration: 15 * 60 }
-};
+    active: { name: "Exp Potion (2x XP for 15min)", multiplier: 2.0, duration: 15 * 60 }
+});
 
-const gameData = [
+const coinPotions = Object.freeze({
+    none: { name: "None", multiplier: 1.0, duration: 0 },
+    small: { name: "Small Coins Potion (+50% Coins for 15min)", multiplier: 1.5, duration: 15 * 60 },
+    regular: { name: "Coins Potion (+100% Coins for 15min)", multiplier: 2.0, duration: 15 * 60 }
+});
+
+const dropPotions = Object.freeze({
+    none: { name: "None", multiplier: 1.0, duration: 0 },
+    active: { name: "Drop Potion (2x Token Drops for 15min)", multiplier: 2.0, duration: 15 * 60 }
+});
+
+const soulPotions = Object.freeze({
+    none: { name: "None", multiplier: 1.0, duration: 0 },
+    active: { name: "Soul Potion (2x Avatar Souls for 15min)", multiplier: 2.0, duration: 15 * 60 }
+});
+
+const gameUpgrades = Object.freeze({
+    dungeonExpUpgrades: {
+        name: "Dungeon EXP Upgrades",
+        maxLevel: 10,
+        bonusPerLevel: 5,
+        maxBonus: 50,
+        description: "Increases EXP gain"
+    },
+    coinUpgrades: {
+        name: "Coin Upgrades",
+        maxLevel: 30,
+        bonusPerLevel: 5,
+        maxBonus: 150,
+        description: "Increases coin gain"
+    },
+    upgradeDrops: {
+        name: "Upgrade Drops",
+        maxLevel: 13,
+        bonusPerLevel: 0.05,
+        maxBonus: 0.65,
+        description: "Increases the drop amount of tokens"
+    },
+    avatarSoulsUpgrade: {
+        name: "Avatar Souls Upgrade",
+        maxLevel: 19,
+        bonusPerLevel: 0.05,
+        maxBonus: 0.95,
+        description: "Increases the amount of avatar souls"
+    },
+    demonLordLevel: {
+        name: "Demon Lord Level",
+        maxLevel: 100,
+        bonusPerLevel: 0.01,
+        maxBonus: 1.0,
+        description: "Each level increases coin gain by 1% (multiplier)"
+    }
+});
+
+const gameAchievements = Object.freeze({
+    totalCoinsAchievements: {
+        name: "Total Coins Achievements",
+        tiers: [
+            { tier: "I", bonus: 5, description: "Total Coins Tier I - +5% coin gain" },
+            { tier: "II", bonus: 5, description: "Total Coins Tier II - +5% coin gain" },
+            { tier: "III", bonus: 5, description: "Total Coins Tier III - +5% coin gain" },
+            { tier: "IV", bonus: 5, description: "Total Coins Tier IV - +5% coin gain" },
+            { tier: "V", bonus: 5, description: "Total Coins Tier V - +5% coin gain" },
+            { tier: "VI", bonus: 5, description: "Total Coins Tier VI - +5% coin gain" },
+            { tier: "VII", bonus: 5, description: "Total Coins Tier VII - +5% coin gain" },
+            { tier: "VIII", bonus: 5, description: "Total Coins Tier VIII - +5% coin gain" },
+            { tier: "IX", bonus: 5, description: "Total Coins Tier IX - +5% coin gain" },
+            { tier: "X", bonus: 5, description: "Total Coins Tier X - +5% coin gain" },
+            { tier: "XI", bonus: 5, description: "Total Coins Tier XI - +5% coin gain" },
+            { tier: "XII", bonus: 5, description: "Total Coins Tier XII - +5% coin gain" },
+            { tier: "XIII", bonus: 5, description: "Total Coins Tier XIII - +5% coin gain" },
+            { tier: "XIV", bonus: 5, description: "Total Coins Tier XIV - +5% coin gain" },
+            { tier: "XV", bonus: 5, description: "Total Coins Tier XV - +5% coin gain" }
+        ],
+        stackable: true,
+        description: "Achievements for total coins collected - each tier is independent"
+    },
+    dungeonAchievements: {
+        name: "Dungeon Achievements",
+        tiers: [
+            { name: "Dungeon Easy IV", bonus: 5, description: "Complete Dungeon Easy IV - +5% coin gain" },
+            { name: "Dungeon Medium IV", bonus: 5, description: "Complete Dungeon Medium IV - +5% coin gain" },
+            { name: "Dungeon Hard IV", bonus: 5, description: "Complete Dungeon Hard IV - +5% coin gain" },
+            { name: "Dungeon Insane IV", bonus: 5, description: "Complete Dungeon Insane IV - +5% coin gain" },
+            { name: "Dungeon Crazy IV", bonus: 10, description: "Complete Dungeon Crazy IV - +10% coin gain" },
+            { name: "Dungeon Nightmare IV", bonus: 5, description: "Complete Dungeon Nightmare IV - +5% coin gain" }
+        ],
+        maxBonus: 35,
+        description: "Achievements for completing dungeons"
+    },
+    worldQuestAchievements: {
+        name: "World Quest Achievements",
+        quests: [
+            { world: "Earth City", bonus: 5, description: "Complete Earth City quests - +5% coin gain" },
+            { world: "Windmill Island", bonus: 5, description: "Complete Windmill Island quests - +5% coin gain" },
+            { world: "Soul Society", bonus: 5, description: "Complete Soul Society quests - +5% coin gain" },
+            { world: "Cursed School", bonus: 5, description: "Complete Cursed School quests - +5% coin gain" },
+            { world: "Slayer Village", bonus: 5, description: "Complete Slayer Village quests - +5% coin gain" },
+            { world: "Solo Island", bonus: 5, description: "Complete Solo Island quests - +5% coin gain" },
+            { world: "Clover Village", bonus: 5, description: "Complete Clover Village quests - +5% coin gain" },
+            { world: "Leaf Village", bonus: 5, description: "Complete Leaf Village quests - +5% coin gain" },
+            { world: "Spirit Residence", bonus: 5, description: "Complete Spirit Residence quests - +5% coin gain" },
+            { world: "Magic Hunter City", bonus: 5, description: "Complete Magic Hunter City quests - +5% coin gain" },
+            { world: "Titan City", bonus: 5, description: "Complete Titan City quests - +5% coin gain" },
+            { world: "Village of Sins", bonus: 5, description: "Complete Village of Sins quests - +5% coin gain" },
+            { world: "Kaiju Base", bonus: 4, description: "Complete Kaiju Base quests - +4% coin gain" },
+            { world: "Tempest Capital", bonus: 3, description: "Complete Tempest Capital quests - +3% coin gain" },
+            { world: "Virtual City", bonus: 2, description: "Complete Virtual City quests - +2% coin gain" }
+        ],
+        stackable: true,
+        description: "Achievements for completing world quests - each world is independent"
+    }
+});
+
+const gameItems = Object.freeze({
+    auras: [
+        { 
+            name: "None", 
+            coinsMultiplier: 0, 
+            expMultiplier: 0, 
+            souls: 0,
+            tokenDrops: 0,
+            description: "No aura equipped"
+        },
+        { 
+            name: "Flaming Aura", 
+            coinsMultiplier: 0.15,
+            description: "Increases coin gain by 0.15x multiplier"
+        },
+        { 
+            name: "Fire King Aura", 
+            tokenDrops: 0.25,
+            description: "Increases token drop amount by 25%"
+        }
+    ],
+    jewelry: {
+        rings: [
+            { name: "None", multiplier: 0, description: "No ring equipped" },
+            { name: "Bronze Coin Ring", multiplier: 0.10, description: "Increases coin gain by 0.10x multiplier" },
+            { name: "Silver Coin Ring", multiplier: 0.25, description: "Increases coin gain by 0.25x multiplier" },
+            { name: "Gold Coin Ring", multiplier: 0.50, description: "Increases coin gain by 0.50x multiplier" },
+            { name: "Rose Gold Coin Ring", multiplier: 0.75, description: "Increases coin gain by 0.75x multiplier" }
+        ],
+        necklaces: [
+            { name: "None", multiplier: 0, description: "No necklace equipped" },
+            { name: "Bronze Coin Necklace", multiplier: 0.10, description: "Increases coin gain by 0.10x multiplier" },
+            { name: "Silver Coin Necklace", multiplier: 0.25, description: "Increases coin gain by 0.25x multiplier" },
+            { name: "Gold Coin Necklace", multiplier: 0.50, description: "Increases coin gain by 0.50x multiplier" },
+            { name: "Rose Gold Coin Necklace", multiplier: 0.75, description: "Increases coin gain by 0.75x multiplier" }
+        ],
+        earrings: [
+            { name: "None", multiplier: 0, description: "No earrings equipped" },
+            { name: "Bronze Coin Earrings", multiplier: 0.10, description: "Increases coin gain by 0.10x multiplier" },
+            { name: "Silver Coin Earrings", multiplier: 0.25, description: "Increases coin gain by 0.25x multiplier" },
+            { name: "Gold Coin Earrings", multiplier: 0.50, description: "Increases coin gain by 0.50x multiplier" },
+            { name: "Rose Gold Coin Earrings", multiplier: 0.75, description: "Increases coin gain by 0.75x multiplier" }
+        ]
+    },
+    accessories: {
+        hats: [
+            { name: "None", baseCoins: 0, description: "No hat equipped" },
+            { name: "4 Star Hat 1", baseCoins: 0.100, description: "Adds 0.1 base coins per kill" },
+            { name: "4 Star Hat 2", baseCoins: 0.150, description: "Adds 0.15 base coins per kill" },
+            { name: "4 Star Hat 3", baseCoins: 0.200, description: "Adds 0.2 base coins per kill" },
+            { name: "4 Star Hat 4", baseCoins: 0.250, description: "Adds 0.25 base coins per kill" },
+            { name: "4 Star Hat 5", baseCoins: 0.300, description: "Adds 0.3 base coins per kill" },
+            { name: "4 Star Hat 6", baseCoins: 0.350, description: "Adds 0.35 base coins per kill" },
+            { name: "4 Star Hat 7", baseCoins: 0.500, description: "Adds 0.5 base coins per kill" }
+        ],
+        scarfs: [
+            { name: "None", baseCoins: 0, description: "No scarf equipped" },
+            { name: "Red Scarf 1", baseCoins: 0.300, description: "Adds 0.3 base coins per kill" },
+            { name: "Red Scarf 2", baseCoins: 0.450, description: "Adds 0.45 base coins per kill" },
+            { name: "Red Scarf 3", baseCoins: 0.600, description: "Adds 0.6 base coins per kill" },
+            { name: "Red Scarf 4", baseCoins: 0.750, description: "Adds 0.75 base coins per kill" },
+            { name: "Red Scarf 5", baseCoins: 0.900, description: "Adds 0.9 base coins per kill" },
+            { name: "Red Scarf 6", baseCoins: 1.200, description: "Adds 1.2 base coins per kill" },
+            { name: "Red Scarf 7", baseCoins: 1.500, description: "Adds 1.5 base coins per kill" }
+        ],
+        masks: [
+            { name: "None", baseCoins: 0, expPercentage: 0, description: "No mask equipped" },
+            { name: "Slime Mask 1", baseCoins: 0.050, expPercentage: 1.0, description: "Adds 0.05 base coins + 1% exp boost" },
+            { name: "Slime Mask 2", baseCoins: 0.075, expPercentage: 1.5, description: "Adds 0.075 base coins + 1.5% exp boost" },
+            { name: "Slime Mask 3", baseCoins: 0.100, expPercentage: 2.0, description: "Adds 0.1 base coins + 2% exp boost" },
+            { name: "Slime Mask 4", baseCoins: 0.125, expPercentage: 2.5, description: "Adds 0.125 base coins + 2.5% exp boost" },
+            { name: "Slime Mask 5", baseCoins: 0.150, expPercentage: 3.0, description: "Adds 0.15 base coins + 3% exp boost" },
+            { name: "Slime Mask 6", baseCoins: 0.175, expPercentage: 3.5, description: "Adds 0.175 base coins + 3.5% exp boost" },
+            { name: "Slime Mask 7", baseCoins: 0.250, expPercentage: 5.0, description: "Adds 0.25 base coins + 5% exp boost" }
+        ],
+        cloaks: [
+            { name: "None", expPercentage: 0, description: "No cloak equipped" },
+            { name: "Armless Cloak 1", expPercentage: 1.0, description: "Increases exp gain by 1%" },
+            { name: "Armless Cloak 2", expPercentage: 1.5, description: "Increases exp gain by 1.5%" },
+            { name: "Armless Cloak 3", expPercentage: 2.0, description: "Increases exp gain by 2%" },
+            { name: "Armless Cloak 4", expPercentage: 2.5, description: "Increases exp gain by 2.5%" },
+            { name: "Armless Cloak 5", expPercentage: 3.0, description: "Increases exp gain by 3%" },
+            { name: "Armless Cloak 6", expPercentage: 3.5, description: "Increases exp gain by 3.5%" },
+            { name: "Armless Cloak 7", expPercentage: 5.0, description: "Increases exp gain by 5%" }
+        ]
+    },
+    powers: {
+        demonFruits: [
+            { name: "None", baseCoins: 0, description: "No demon fruit power" },
+            { name: "Money Fruit", baseCoins: 1.0, description: "Adds 1 base coin per kill" }
+        ],
+        powerEyes: [
+            { name: "None", coinsMultiplier: 0, description: "No power eyes" },
+            { name: "Cyclone Eye", coinsMultiplier: 0.5, description: "Increases coin gain by 0.5x multiplier" },
+            { name: "Atomic Insight Eye", coinsMultiplier: 1.0, description: "Increases coin gain by 1.0x multiplier" },
+            { name: "Eye Of Six Paths", coinsMultiplier: 1.0, description: "Increases coin gain by 1.0x multiplier" }
+        ],
+        virtues: [
+            { name: "None", coinsMultiplier: 0, expMultiplier: 0, description: "No virtue power" },
+            { name: "Truth", coinsMultiplier: 1.0, description: "Increases coin gain by 1.0x multiplier" },
+            { name: "Love", coinsMultiplier: 1.0, description: "Increases coin gain by 1.0x multiplier" }
+        ]
+    }
+});
+
+const gameData = Object.freeze([
     { name: "Kriluni", hp: 5000, world: "Earth City", rank: "E", coins: 50, exp: 1 },
     { name: "Ymicha", hp: 230000, world: "Earth City", rank: "D", coins: 100, exp: 2 },
     { name: "Tian Shan", hp: 5000000, world: "Earth City", rank: "C", coins: 150, exp: 3 },
@@ -448,7 +536,7 @@ const gameData = [
     { name: "Asana", hp: 9.18e77, world: "Virtual City", rank: "A", coins: 2.5e16, exp: 98304 },
     { name: "Beater", hp: 9.67e78, world: "Virtual City", rank: "S", coins: 3e16, exp: 245760 },
     { name: "The Paladin", hp: 9.67e86, world: "Virtual City", rank: "SS", coins: 7e16, exp: 368640 }
-];
+]);
 
 function generateLeafRaidData() {
     const leafRaidData = [];
@@ -496,290 +584,8 @@ function generateTitanDefenseData() {
     return titanDefenseData;
 }
 
-const allGameData = [...gameData, ...generateLeafRaidData(), ...generateTitanDefenseData()];
-
-const ATTACK_SPEED = 5.0;
-const MOB_RESPAWN_TIME = 2;
-
-const gameItems = {
-    auras: [
-        { name: "None", coinsMultiplier: 0 },
-        { name: "Flaming Aura", coinsMultiplier: 0.15 },
-    ],
-    jewelry: {
-        rings: [
-            { name: "None", multiplier: 0 },
-            { name: "Bronze Coin Ring", multiplier: 0.10 },
-            { name: "Silver Coin Ring", multiplier: 0.25 },
-            { name: "Gold Coin Ring", multiplier: 0.50 },
-            { name: "Rose Gold Coin Ring", multiplier: 0.75 }
-        ],
-        necklaces: [
-            { name: "None", multiplier: 0 },
-            { name: "Bronze Coin Necklace", multiplier: 0.10 },
-            { name: "Silver Coin Necklace", multiplier: 0.25 },
-            { name: "Gold Coin Necklace", multiplier: 0.50 },
-            { name: "Rose Gold Coin Necklace", multiplier: 0.75 }
-        ],
-        earrings: [
-            { name: "None", multiplier: 0 },
-            { name: "Bronze Coin Earrings", multiplier: 0.10 },
-            { name: "Silver Coin Earrings", multiplier: 0.25 },
-            { name: "Gold Coin Earrings", multiplier: 0.50 },
-            { name: "Rose Gold Coin Earrings", multiplier: 0.75 }
-        ]
-    },
-    equipment: {
-        hats: [
-            { name: "None", baseCoins: 0 },
-            { name: "4 Star Hat 1", baseCoins: 0.100 },
-            { name: "4 Star Hat 2", baseCoins: 0.150 },
-            { name: "4 Star Hat 3", baseCoins: 0.200 },
-            { name: "4 Star Hat 4", baseCoins: 0.250 },
-            { name: "4 Star Hat 5", baseCoins: 0.300 },
-            { name: "4 Star Hat 6", baseCoins: 0.350 },
-            { name: "4 Star Hat 7", baseCoins: 0.500 }
-        ],
-        scarfs: [
-            { name: "None", baseCoins: 0 },
-            { name: "Red Scarf 1", baseCoins: 0.300 },
-            { name: "Red Scarf 2", baseCoins: 0.450 },
-            { name: "Red Scarf 3", baseCoins: 0.600 },
-            { name: "Red Scarf 4", baseCoins: 0.750 },
-            { name: "Red Scarf 5", baseCoins: 0.900 },
-            { name: "Red Scarf 6", baseCoins: 1.200 },
-            { name: "Red Scarf 7", baseCoins: 1.500 }
-        ],
-        masks: [
-            { name: "None", baseCoins: 0, expPercentage: 0 },
-            { name: "Slime Mask 1", baseCoins: 0.050, expPercentage: 1.0 },
-            { name: "Slime Mask 2", baseCoins: 0.075, expPercentage: 1.5 },
-            { name: "Slime Mask 3", baseCoins: 0.100, expPercentage: 2.0 },
-            { name: "Slime Mask 4", baseCoins: 0.125, expPercentage: 2.5 },
-            { name: "Slime Mask 5", baseCoins: 0.150, expPercentage: 3.0 },
-            { name: "Slime Mask 6", baseCoins: 0.175, expPercentage: 3.5 },
-            { name: "Slime Mask 7", baseCoins: 0.250, expPercentage: 5.0 }
-        ],
-        cloaks: [
-            { name: "None", expPercentage: 0 },
-            { name: "Armless Cloak", expPercentage: 10.0 }
-        ]
-    },
-    powers: {
-        demonFruits: [
-            { name: "None", baseCoins: 0 },
-            { name: "Money Fruit", baseCoins: 1.0 }
-        ],
-        powerEyes: [
-            { name: "None", coinsMultiplier: 0 },
-            { name: "Cyclone Eye", coinsMultiplier: 0.5 },
-            { name: "Atomic Insight Eye", coinsMultiplier: 1.0 },
-            { name: "Eye Of Six Paths", coinsMultiplier: 1.0 }
-        ],
-        virtues: [
-            { name: "None", coinsMultiplier: 0 },
-            { name: "Truth", coinsMultiplier: 1.0 },
-            { name: "Love", coinsMultiplier: 1.0 }
-        ]
-    }
-};
-
-const dropRates = {
-    tokens: {
-        min: 1,
-        max: 5,
-        average: 3,
-        baseChance: 0.1
-    },
-    avatarSouls: {
-        min: 1,
-        max: 1,
-        average: 1,
-        baseChance: 0.15
-    }
-};
-
-const numberSuffixes = [
-    { value: 1e3, suffix: "K" },
-    { value: 1e6, suffix: "M" },
-    { value: 1e9, suffix: "B" },
-    { value: 1e12, suffix: "T" },
-    { value: 1e15, suffix: "qd" },
-    { value: 1e18, suffix: "Qn" },
-    { value: 1e21, suffix: "sx" },
-    { value: 1e24, suffix: "Sp" },
-    { value: 1e27, suffix: "O" },
-    { value: 1e30, suffix: "N" },
-    { value: 1e33, suffix: "de" },
-    { value: 1e36, suffix: "Ud" },
-    { value: 1e39, suffix: "DD" },
-    { value: 1e42, suffix: "tdD" },
-    { value: 1e45, suffix: "qdD" },
-    { value: 1e48, suffix: "QnD" },
-    { value: 1e51, suffix: "sxD" },
-    { value: 1e54, suffix: "SpD" },
-    { value: 1e57, suffix: "OcD" },
-    { value: 1e60, suffix: "NvD" },
-    { value: 1e63, suffix: "Vgn" },
-    { value: 1e66, suffix: "UVg" },
-    { value: 1e69, suffix: "DVg" },
-    { value: 1e72, suffix: "TVg" },
-    { value: 1e75, suffix: "qtV" },
-    { value: 1e78, suffix: "QnV" },
-    { value: 1e81, suffix: "SeV" },
-    { value: 1e84, suffix: "SPG" },
-    { value: 1e87, suffix: "OcG" },
-    { value: 1e90, suffix: "NoG" },
-    { value: 1e93, suffix: "DcG" },
-    { value: 1e96, suffix: "TdG" },
-    { value: 1e99, suffix: "QdG" },
-    { value: 1e102, suffix: "QnG" },
-    { value: 1e105, suffix: "SxG" },
-    { value: 1e108, suffix: "SpG" },
-    { value: 1e111, suffix: "OtG" },
-    { value: 1e114, suffix: "NoA" },
-    { value: 1e117, suffix: "DcA" },
-    { value: 1e120, suffix: "TdA" },
-    { value: 1e123, suffix: "QdA" },
-    { value: 1e126, suffix: "QnA" },
-    { value: 1e129, suffix: "SxA" },
-    { value: 1e132, suffix: "SpA" },
-    { value: 1e135, suffix: "OtA" },
-    { value: 1e138, suffix: "NoS" },
-    { value: 1e141, suffix: "DcS" },
-    { value: 1e144, suffix: "TdS" },
-    { value: 1e147, suffix: "QdS" },
-    { value: 1e150, suffix: "QnS" },
-    { value: 1e153, suffix: "SxS" },
-    { value: 1e156, suffix: "SpS" },
-    { value: 1e159, suffix: "OtS" },
-    { value: 1e162, suffix: "NoP" },
-    { value: 1e165, suffix: "DcP" },
-    { value: 1e168, suffix: "TdP" },
-    { value: 1e171, suffix: "QdP" },
-    { value: 1e174, suffix: "QnP" },
-    { value: 1e177, suffix: "SxP" },
-    { value: 1e180, suffix: "SpP" },
-    { value: 1e183, suffix: "OtP" },
-    { value: 1e186, suffix: "NoE" },
-    { value: 1e189, suffix: "DcE" },
-    { value: 1e192, suffix: "TdE" },
-    { value: 1e195, suffix: "QdE" },
-    { value: 1e198, suffix: "QnE" },
-    { value: 1e201, suffix: "SxE" },
-    { value: 1e204, suffix: "SpE" },
-    { value: 1e207, suffix: "OtE" },
-    { value: 1e210, suffix: "NoZ" },
-    { value: 1e213, suffix: "DcZ" },
-    { value: 1e216, suffix: "TdZ" },
-    { value: 1e219, suffix: "QdZ" },
-    { value: 1e222, suffix: "QnZ" },
-    { value: 1e225, suffix: "SxZ" },
-    { value: 1e228, suffix: "SpZ" },
-    { value: 1e231, suffix: "OtZ" },
-    { value: 1e234, suffix: "NoY" },
-    { value: 1e237, suffix: "DcY" },
-    { value: 1e240, suffix: "TdY" },
-    { value: 1e243, suffix: "QdY" },
-    { value: 1e246, suffix: "QnY" },
-    { value: 1e249, suffix: "SxY" },
-    { value: 1e252, suffix: "SpY" },
-    { value: 1e255, suffix: "OtY" },
-    { value: 1e258, suffix: "NoX" },
-    { value: 1e261, suffix: "DcX" },
-    { value: 1e264, suffix: "TdX" },
-    { value: 1e267, suffix: "QdX" },
-    { value: 1e270, suffix: "QnX" },
-    { value: 1e273, suffix: "SxX" },
-    { value: 1e276, suffix: "SpX" },
-    { value: 1e279, suffix: "OtX" },
-    { value: 1e282, suffix: "NoW" },
-    { value: 1e285, suffix: "DcW" },
-    { value: 1e288, suffix: "TdW" },
-    { value: 1e291, suffix: "QdW" },
-    { value: 1e294, suffix: "QnW" },
-    { value: 1e297, suffix: "SxW" },
-    { value: 1e300, suffix: "SpW" },
-    { value: 1e303, suffix: "OtW" },
-    { value: 1e306, suffix: "NoV" },
-    { value: 1e309, suffix: "DcV" },
-    { value: 1e312, suffix: "TdV" },
-    { value: 1e315, suffix: "QdV" },
-    { value: 1e318, suffix: "QnV" },
-    { value: 1e321, suffix: "SxV" },
-    { value: 1e324, suffix: "SpV" },
-    { value: 1e327, suffix: "OtV" },
-    { value: 1e330, suffix: "NoU" },
-    { value: 1e333, suffix: "DcU" },
-    { value: 1e336, suffix: "TdU" },
-    { value: 1e339, suffix: "QdU" },
-    { value: 1e342, suffix: "QnU" },
-    { value: 1e345, suffix: "SxU" },
-    { value: 1e348, suffix: "SpU" },
-    { value: 1e351, suffix: "OtU" },
-    { value: 1e354, suffix: "NoT" },
-    { value: 1e357, suffix: "DcT" },
-    { value: 1e360, suffix: "TdT" },
-    { value: 1e363, suffix: "QdT" },
-    { value: 1e366, suffix: "QnT" },
-    { value: 1e369, suffix: "SxT" },
-    { value: 1e372, suffix: "SpT" },
-    { value: 1e375, suffix: "OtT" },
-    { value: 1e378, suffix: "NoR" },
-    { value: 1e381, suffix: "DcR" },
-    { value: 1e384, suffix: "TdR" },
-    { value: 1e387, suffix: "QdR" },
-    { value: 1e390, suffix: "QnR" },
-    { value: 1e393, suffix: "SxR" },
-    { value: 1e396, suffix: "SpR" },
-    { value: 1e399, suffix: "OtR" },
-    { value: 1e402, suffix: "NoQ" },
-    { value: 1e405, suffix: "DcQ" },
-    { value: 1e408, suffix: "TdQ" },
-    { value: 1e411, suffix: "QdQ" },
-    { value: 1e414, suffix: "QnQ" },
-    { value: 1e417, suffix: "SxQ" },
-    { value: 1e420, suffix: "SpQ" },
-    { value: 1e423, suffix: "OtQ" }
-];
-
-function formatNumber(num) {
-    if (num === 0 || !isFinite(num)) return "0";
-    
-    const absNum = Math.abs(num);
-    const isNegative = num < 0;
-    
-    if (absNum < 1000) {
-        return (isNegative ? "-" : "") + Math.round(absNum).toLocaleString();
-    }
-    
-    const sortedSuffixes = [...numberSuffixes].sort((a, b) => b.value - a.value);
-    
-    for (const item of sortedSuffixes) {
-        if (absNum >= item.value) {
-            const divided = absNum / item.value;
-            
-            let formatted;
-            if (divided >= 100) {
-                formatted = Math.round(divided).toString();
-            } else if (divided >= 10) {
-                const rounded = Math.round(divided * 10) / 10;
-                formatted = rounded % 1 === 0 ? rounded.toString() : rounded.toFixed(1);
-            } else {
-                const rounded = Math.round(divided * 100) / 100;
-                formatted = rounded % 1 === 0 ? rounded.toString() : 
-                           (rounded * 10) % 1 === 0 ? rounded.toFixed(1) : rounded.toFixed(2);
-            }
-            
-            return (isNegative ? "-" : "") + formatted + item.suffix;
-        }
-    }
-    
-    return (isNegative ? "-" : "") + absNum.toPrecision(3);
-}
-
 function formatTime(seconds) {
-    if (seconds < (1 / ATTACK_SPEED)) return "Instant Kill";
+    if (seconds <= 0.2) return "Instant Kill";
     if (seconds < 60) return `${seconds.toFixed(1)}s`;
     if (seconds < 3600) return `${(seconds / 60).toFixed(1)}m`;
     if (seconds < 86400) return `${(seconds / 3600).toFixed(1)}h`;
@@ -805,7 +611,7 @@ function formatDuration(totalSeconds) {
 }
 
 function getTimeCategory(seconds) {
-    if (seconds < (1 / ATTACK_SPEED)) return 'instant';
+    if (seconds <= 0.2) return 'instant';
     if (seconds < 30) return 'fast';
     if (seconds < 300) return 'medium';
     return 'slow';
@@ -969,185 +775,6 @@ function getRankData(currentRank) {
     return rankData.find(rank => rank.currentRank === currentRank);
 }
 
-function calculateRankUpTime(config) {
-    const {
-        currentRank,
-        energyPerClick,
-        currentEnergy = 0,
-        potionType = 'none',
-        potionDuration = 0,
-        targetEnergy = null
-    } = config;
-
-    if (currentRank < 1 || currentRank > 75) {
-        return { valid: false, error: "Rank must be between 1 and 75" };
-    }
-
-    if (energyPerClick <= 0) {
-        return { valid: false, error: "Energy per click must be greater than 0" };
-    }
-
-    const rankInfo = getRankData(currentRank);
-    if (!rankInfo) {
-        return { valid: false, error: "Invalid rank data" };
-    }
-
-    if (currentRank === 75) {
-        if (!targetEnergy || targetEnergy <= 0) {
-            return { valid: false, error: "Please set a target energy goal for max rank" };
-        }
-
-        const energyNeeded = Math.max(0, targetEnergy - currentEnergy);
-
-        if (energyNeeded <= 0) {
-            return {
-                valid: true,
-                currentRank,
-                nextRank: null,
-                energyRequired: targetEnergy,
-                currentEnergy,
-                energyRemaining: 0,
-                energyPerClick,
-                potionInfo: {
-                    type: energyPotions[potionType]?.name || 'None',
-                    multiplier: energyPotions[potionType]?.multiplier || 1,
-                    duration: potionDuration,
-                    durationFormatted: formatDuration(potionDuration)
-                },
-                totalTimeSeconds: 0,
-                timeFormatted: "Energy Goal Already Reached!",
-                energyMultiplier: rankInfo.energyMultiplier,
-                nextRankMultiplier: rankInfo.energyMultiplier,
-                isMaxRank: true,
-                targetEnergy,
-                progressPercentage: 100
-            };
-        }
-
-        const totalTimeSeconds = calculateEnergyGainTime(energyNeeded, energyPerClick, potionType, potionDuration);
-
-        return {
-            valid: true,
-            currentRank,
-            nextRank: null,
-            energyRequired: targetEnergy,
-            currentEnergy,
-            energyRemaining: energyNeeded,
-            energyPerClick,
-            potionInfo: {
-                type: energyPotions[potionType]?.name || 'None',
-                multiplier: energyPotions[potionType]?.multiplier || 1,
-                duration: potionDuration,
-                durationFormatted: formatDuration(potionDuration)
-            },
-            totalTimeSeconds,
-            timeFormatted: formatDuration(totalTimeSeconds),
-            energyMultiplier: rankInfo.energyMultiplier,
-            nextRankMultiplier: rankInfo.energyMultiplier,
-            isMaxRank: true,
-            targetEnergy,
-            progressPercentage: targetEnergy > 0 ? (currentEnergy / targetEnergy) * 100 : 0
-        };
-    }
-
-    if (!rankInfo.energyRequired) {
-        return { valid: false, error: "Invalid rank data" };
-    }
-
-    const energyNeeded = Math.max(0, rankInfo.energyRequired - currentEnergy);
-
-    if (energyNeeded <= 0) {
-        return {
-            valid: true,
-            currentRank,
-            nextRank: rankInfo.nextRank,
-            energyRequired: rankInfo.energyRequired,
-            currentEnergy,
-            energyRemaining: 0,
-            energyPerClick,
-            potionInfo: {
-                type: energyPotions[potionType]?.name || 'None',
-                multiplier: energyPotions[potionType]?.multiplier || 1,
-                duration: potionDuration,
-                durationFormatted: formatDuration(potionDuration)
-            },
-            totalTimeSeconds: 0,
-            timeFormatted: "Ready to Rank Up!",
-            energyMultiplier: rankInfo.energyMultiplier,
-            nextRankMultiplier: rankData.find(r => r.currentRank === rankInfo.nextRank)?.energyMultiplier || rankInfo.energyMultiplier,
-            isMaxRank: false,
-            progressPercentage: 100
-        };
-    }
-
-    const totalTimeSeconds = calculateEnergyGainTime(energyNeeded, energyPerClick, potionType, potionDuration);
-
-    return {
-        valid: true,
-        currentRank,
-        nextRank: rankInfo.nextRank,
-        energyRequired: rankInfo.energyRequired,
-        currentEnergy,
-        energyRemaining: energyNeeded,
-        energyPerClick,
-        potionInfo: {
-            type: energyPotions[potionType]?.name || 'None',
-            multiplier: energyPotions[potionType]?.multiplier || 1,
-            duration: potionDuration,
-            durationFormatted: formatDuration(potionDuration)
-        },
-        totalTimeSeconds,
-        timeFormatted: formatDuration(totalTimeSeconds),
-        energyMultiplier: rankInfo.energyMultiplier,
-        nextRankMultiplier: rankData.find(r => r.currentRank === rankInfo.nextRank)?.energyMultiplier || rankInfo.energyMultiplier,
-        isMaxRank: false,
-        progressPercentage: rankInfo.energyRequired > 0 ? (currentEnergy / rankInfo.energyRequired) * 100 : 0
-    };
-}
-
-function calculateEnergyGainTime(energyNeeded, energyPerClick, potionType = 'none', potionDuration = 0) {
-    const potion = energyPotions[potionType] || energyPotions.none;
-    let totalTimeSeconds = 0;
-    let energyGained = 0;
-
-    if (potionDuration > 0 && potion.multiplier > 1) {
-        const potionEnergyPerSecond = energyPerClick * potion.multiplier;
-        const energyDuringPotion = Math.min(energyNeeded, potionEnergyPerSecond * potionDuration);
-        energyGained += energyDuringPotion;
-        
-        if (energyGained >= energyNeeded) {
-            totalTimeSeconds = energyNeeded / potionEnergyPerSecond;
-        } else {
-            totalTimeSeconds += potionDuration;
-        }
-    }
-
-    if (energyGained < energyNeeded) {
-        const remainingEnergy = energyNeeded - energyGained;
-        const timeWithoutPotion = remainingEnergy / energyPerClick;
-        totalTimeSeconds += timeWithoutPotion;
-    }
-
-    return totalTimeSeconds;
-}
-
-function calculateEnergyGainOverTime(epc, duration, potionType = 'none', potionDuration = 0) {
-    const potion = energyPotions[potionType] || energyPotions.none;
-    let totalEnergy = 0;
-
-    if (potionDuration > 0 && potion.multiplier > 1) {
-        const effectiveDuration = Math.min(duration, potionDuration);
-        totalEnergy += epc * potion.multiplier * effectiveDuration;
-        duration -= effectiveDuration;
-    }
-
-    if (duration > 0) {
-        totalEnergy += epc * duration;
-    }
-
-    return totalEnergy;
-}
-
 function getAvailableLevels(prestige) {
     const prestigeData = prestigeConfig[prestige];
     if (!prestigeData) return [];
@@ -1180,3 +807,23 @@ function calculateProgressPercentage(current, total) {
     if (total === 0) return 100;
     return Math.min(100, Math.max(0, (current / total) * 100));
 }
+
+const allGameData = Object.freeze([...gameData, ...generateLeafRaidData(), ...generateTitanDefenseData()]);
+
+const ATTACK_SPEED = 5.0;
+const MOB_RESPAWN_TIME = 2;
+
+const dropRates = Object.freeze({
+    tokens: {
+        min: 1,
+        max: 5,
+        average: 3,
+        baseChance: 0.1
+    },
+    avatarSouls: {
+        min: 1,
+        max: 1,
+        average: 1,
+        baseChance: 0.15
+    }
+});
