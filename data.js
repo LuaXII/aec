@@ -72,7 +72,7 @@ const energyRequiredForRank = Object.freeze([
     5e30, 22.2e30, 500e30, 6.9e33, 9.9e33, 27.8e33, 76.9e33, 100e33, 642e33, 7e36, 80e36, 900e36, 
     1e39, 9.99e39, 85e39, 498e39, 5e42, 64.2e42, 500e42, 998e42, 4e45, 90e45, 64.2e45, 100e45, 
     998e45, 5e48, 10e48, 68.9e48, 541e48, 9e51, 200e51, 6.32e54, 91e54, 900e54, 4e57, 10e57, 50e57, 
-    375e57, 1.1e60, 11e60, 55e60, 310e60, 1.1e63
+    375e57, 1.1e60, 11e60, 55e60, 310e60, 10e63
 ]);
 
 const numberSuffixes = Object.freeze([
@@ -827,3 +827,4 @@ const dropRates = Object.freeze({
         baseChance: 0.15
     }
 });
+
